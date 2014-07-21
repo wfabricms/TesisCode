@@ -1,0 +1,14 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - microblog</title>
+    {% else %}
+    <title>Fabricio</title>
+    {% endif %}
+  </head>
+  <body>
+    <div><a href="http://www.utpl.edu.ec">UTPL</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>

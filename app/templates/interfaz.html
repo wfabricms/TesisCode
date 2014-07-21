@@ -1,0 +1,80 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+table, td, th {
+    border: 1px solid black;
+}
+
+td {
+    padding: 15px;
+}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+ <script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<script type=text/javascript>
+  $(function() {
+    $('a#calculate').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/v1/disambiguacionII', {
+        text: $('textarea#text').val()
+      }, function(data) {
+        var entidades = "<h3>Entidades</h3> "
+        if (data.result['entities'].length > 0 ) {
+            entidades += "<table> <tr>  <td> Label    </td> <td>   DBpedia     </td><td>    Frecuencia </td></tr>"
+            for (var i = 0; i < data.result['entities'].length; i++) {
+                entidades += "<tr> <td>" + data.result['entities'][i]['label']+"</td><td>"+data.result['entities'][i]['dbpediaResource']+"</td><td>"+data.result['entities'][i]['frequency'] +"</td><tr>"
+            }
+        
+            entidades += "</table>"
+        }
+
+
+        entidades += "<h3>Keywords Compuestos</h3> "
+        if (data.result['keywordsComp'].length > 0 ) {
+            entidades += "<table> <tr>  <td> <b>Label<b>    </td> <td>   DBpedia     </td><td>    Frecuencia </td></tr>"
+            for (var i = 0; i < data.result['keywordsComp'].length; i++) {
+                entidades += "<tr> <td>" + data.result['keywordsComp'][i]['label']+"</td><td>"+data.result['keywordsComp'][i]['dbpediaResource']+"</td><td>"+data.result['keywordsComp'][i]['frequency'] +"</td><tr>"
+            }
+            entidades += "</table>"
+        }
+
+        entidades += "<h3>Keywords Simples</h3> "
+        if (data.result['keywordsComp'].length > 0 ) {
+            entidades += "<table> <tr>  <td> <b>Label<b>    </td> <td>   DBpedia     </td><td>    Frecuencia </td></tr>"
+            for (var i = 0; i < data.result['keywordsSimp'].length; i++) {
+                entidades += "<tr> <td>" + data.result['keywordsSimp'][i]['label']+"</td><td>"+data.result['keywordsSimp'][i]['dbpediaResource']+"</td><td>"+data.result['keywordsSimp'][i]['frequency'] +"</td><tr>"
+            }
+            entidades += "</table>"
+
+        }
+
+        entidades += "<p><a href=# id=verJson>Ver Json</a>"
+        document.getElementById("resultado").innerHTML = entidades;
+        $('a#verJson').bind('click', function() {
+            document.getElementById("json").innerHTML = JSON.stringify(data);
+        });
+      });
+      return false;
+    });
+
+    
+  });
+</script>
+
+
+<h1>Disambiguation for Text</h1>
+
+    <textarea  name=text rows="7" cols="70" id=text>Loja is in Ecuador</textarea> 
+   
+<p><a href=# id=calculate>Procesar</a>
+
+
+
+<div id=resultado>  </div>    
+<div id=json>  </div>    
+{% endblock %}
