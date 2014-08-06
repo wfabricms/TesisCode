@@ -21,7 +21,7 @@ grammar = r"""
 		"""
 chunker = nltk.RegexpParser(grammar) 
 
-class ProcesarTexto():
+class ProcesarTextov1():
 	
 
 	def PreparaFiltroTexto(self, recurso):
@@ -69,9 +69,29 @@ class ProcesarTexto():
 				OPTIONAL { ?x dbpedia-owl:wikiPageRedirects ?redir }
 				OPTIONAL { ?redir dbpedia-owl:wikiPageDisambiguates ?amb1 }
 				FILTER (?predicado = foaf:name || ?predicado = rdfs:label)
-				FILTER (?text = '"""+term+"""'@en)
+				FILTER (?text = '"""+term+"""'@en || ?text = '"""+term+"""'@en)
 			}
 		""" #%(tittletyope, recurso) #%(encoded_url.lower(), encoded_url.upper(), tittletyope, encoded_url)
+
+		"""
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+			PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+			PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+		SELECT distinct ?x ?amb ?redir ?amb1 ?amb2 ?redir2 ?amb3
+			WHERE {
+				?x ?predicado ?text.
+				OPTIONAL { ?x dbpedia-owl:wikiPageDisambiguates ?amb }
+				OPTIONAL { ?amb2 dbpedia-owl:wikiPageDisambiguates ?x }
+				OPTIONAL { ?amb2 dbpedia-owl:wikiPageRedirects ?redir2 }
+				OPTIONAL { ?amb2 dbpedia-owl:wikiPageDisambiguates ?amb3 }
+				OPTIONAL { ?x dbpedia-owl:wikiPageRedirects ?redir }
+				OPTIONAL { ?redir dbpedia-owl:wikiPageDisambiguates ?amb1 }
+				FILTER (?predicado = foaf:name || ?predicado = rdfs:label)
+				FILTER (?text = 'PE'@en)
+			}
+		"""
+
 		return SparqlQuery
 
 	def extraerListRecursoDBpedia(self, recurso): #return list[] labels de un recurso
@@ -95,6 +115,7 @@ class ProcesarTexto():
 				}
 			"""
 			results = self.ejecutarQuery(SparqlQuery,servidor)
+
 
 		if not len(results["results"]["bindings"]) == 0 :
 			uris = self.extraeListaDesdeJson(results)

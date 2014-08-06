@@ -7,7 +7,8 @@ from flask import render_template, flash, redirect, request
 import jinja2
 from forms import *
 from ExtractEntityLinkDBpedia import Procesar
-from Etiquetado import ProcesarTexto
+from Etiquetado import ProcesarTextov1
+from ConstruccionServicios import *
 
 #import ExtractEntityLinkDBpedia
 
@@ -105,15 +106,41 @@ def entities(text):
 
 @app.route('/v1/disambiguacion/<string:text>', methods = ['GET'])
 def entitiesDisambiguacion(text):
-    objProcesaTexto = ProcesarTexto()
+    objProcesaTexto = ProcesarTextov1()
     jsonResult = objProcesaTexto.main(text)
     return jsonify(result = jsonResult)
 
 
-@app.route('/v1/disambiguacionII', methods = ['GET'])
+@app.route('/v1/disambiguacionII/', methods = ['GET'])
 def entitiesDisambiguacionII():
-    text = request.args.get('text', "Quito capital of Ecuador")
-    objProcesaTexto = ProcesarTexto()
+    text = request.args.get('text', "Loja capital of Ecuador")
+    objProcesaTexto = ProcesarTextov1()
     jsonResult = objProcesaTexto.main(text)
     return jsonify(result = jsonResult)
+    #return jsonify(result = json.dumps(jsonResult))
+
+##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+@app.route('/v1/TokensSentencias', methods = ['GET'])
+def TokensSentencias():
+    text = request.args.get('text', "Loja is the capital of Ecuador. Loja is here")
+    objConstServ = ConstruccionServicios()
+    result = objConstServ.TokenizacionSentencias(text)
+    return jsonify(result = result)
+    #return jsonify(result = json.dumps(jsonResult))
+
+@app.route('/v1/Etiquetado', methods = ['GET'])
+def Etiquetado():
+    text = request.args.get('text', "Loja is the capital of Ecuador. Loja is here")
+    objConstServ = ConstruccionServicios()
+    result = objConstServ.EtiquetarTT(text)
+    return jsonify(result = result)
+    #return jsonify(result = json.dumps(jsonResult))
+
+@app.route('/v1/ExtracionEntidades', methods = ['GET'])
+def ExtracionEntidades():
+    text = request.args.get('text', "Loja is the capital of Ecuador. Loja is here")
+    objConstServ = ConstruccionServicios()
+    result = objConstServ.ExtracionEntidadesAndKeywords(text)
+    return jsonify(result = result)
     #return jsonify(result = json.dumps(jsonResult))
