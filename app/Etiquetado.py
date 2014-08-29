@@ -25,14 +25,14 @@ class ProcesarTextov1():
 	
 
 	def PreparaFiltroTexto(self, recurso):
-		tittletyope = ""	
+		tittletype = ""	
 		for s in recurso.split():
 			if s.lower() in stopwords.words('english') or s.lower() in stopwords.words('spanish'):
-				tittletyope = tittletyope + s.lower() + ' ' 
+				tittletype = tittletype + s.lower() + ' ' 
 			else:
-				tittletyope = tittletyope + s.title() + ' ' 
-		tittletyope = tittletyope[:-1]
-		return tittletyope
+				tittletype = tittletype + s.title() + ' ' 
+		tittletype = tittletype[:-1]
+		return tittletype
 
 	def ejecutarQuery(self, SparqlQuery, servidor):
 		sparql = SPARQLWrapper(servidor)

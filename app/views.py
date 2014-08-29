@@ -141,6 +141,14 @@ def Etiquetado():
 def ExtracionEntidades():
     text = request.args.get('text', "Loja is the capital of Ecuador. Loja is here")
     objConstServ = ConstruccionServicios()
-    result = objConstServ.ExtracionEntidadesAndKeywords(text)
+    result = objConstServ.ExtracionEntidadesAndKeywords(text, 0)
+    return jsonify(result = result)
+    #return jsonify(result = json.dumps(jsonResult))
+
+@app.route('/v1/Desambiguacion', methods = ['GET'])
+def DesamabiguacionEntidades():
+    text = request.args.get('text', "Loja is the capital of Ecuador. Loja is here")
+    objConstServ = ConstruccionServicios()
+    result = objConstServ.ExtracionEntidadesAndKeywords(text, 1)
     return jsonify(result = result)
     #return jsonify(result = json.dumps(jsonResult))
