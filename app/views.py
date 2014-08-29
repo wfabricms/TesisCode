@@ -152,3 +152,8 @@ def DesamabiguacionEntidades():
     result = objConstServ.ExtracionEntidadesAndKeywords(text, 1)
     return jsonify(result = result)
     #return jsonify(result = json.dumps(jsonResult))
+
+@app.route('/frontal', methods = ['GET', 'POST'])
+def frontal():
+        return render_template('frontal.html', 
+        title = 'Web Servie Disambiguacion')
