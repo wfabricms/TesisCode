@@ -1,0 +1,16 @@
+
+.rest {
+    border: 1px solid black;
+}
+
+td {
+    padding: 15px;
+}
+
+.tablaA{
+	margin: auto;
+    width: 70%;
+    background-color: #b0e0e6;
+}
+
+<link href="estilo.css" rel="stylesheet" type="text/css">

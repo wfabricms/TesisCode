@@ -12,7 +12,7 @@ class Desambiguacion():
 		for word_i in listData:
 			if len(word_i['DBpedRList']) == 1 :
 				word_i['dbpediaResource'] = word_i['DBpedRList'][0]['uri']
-				print word_i['dbpediaResource']
+				#print word_i['dbpediaResource']
 				continue
 			#print "\n	",word_i['label'], "..."
 			BEST_SCORE = 0

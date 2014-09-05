@@ -22,6 +22,8 @@ def add_numbers():
 def index():
     return render_template('index.html')
 
+
+
 """
 @app.route('/')
 @app.route('/index')
@@ -128,6 +130,13 @@ def TokensSentencias():
     result = objConstServ.TokenizacionSentencias(text)
     return jsonify(result = result)
     #return jsonify(result = json.dumps(jsonResult))
+
+@app.route('/v1/TokensPalabra', methods = ['GET'])
+def TokenizarPalabras():
+    text = request.args.get('text', "Loja is the capital of Ecuador. Loja is here")
+    objConstServ = ConstruccionServicios()
+    result = objConstServ.TokenizarTT(text)
+    return jsonify(result = result)
 
 @app.route('/v1/Etiquetado', methods = ['GET'])
 def Etiquetado():

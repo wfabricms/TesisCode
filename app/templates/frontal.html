@@ -3,191 +3,43 @@
 
 {% block content %}
 
-<style>
-table, td, th {
-    border: 1px solid black;
-}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
 
-td {
-    padding: 15px;
-}
-</style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
- <script type=text/javascript>
-  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-</script>
-<script type=text/javascript>
-  $(function() {
-    $('a#calculate').bind('click', function() {
-      $.getJSON($SCRIPT_ROOT + '/v1/disambiguacionII', {
-        text: $('textarea#text').val()
-      }, function(data) {
-        var entidades = "<h3>Entidades</h3> "
-        if (data.result['entities'].length > 0 ) {
-            entidades += "<table> <tr>  <td> Label    </td> <td>   DBpedia     </td><td>    Frecuencia </td></tr>"
-            for (var i = 0; i < data.result['entities'].length; i++) {
-                entidades += "<tr> <td>" + data.result['entities'][i]['label']+"</td><td>"+data.result['entities'][i]['dbpediaResource']+"</td><td>"+data.result['entities'][i]['frequency'] +"</td><tr>"
-            }
-        
-            entidades += "</table>"
-        }
-
-
-        entidades += "<h3>Keywords Compuestos</h3> "
-        if (data.result['keywordsComp'].length > 0 ) {
-            entidades += "<table> <tr>  <td> <b>Label<b>    </td> <td>   DBpedia     </td><td>    Frecuencia </td></tr>"
-            for (var i = 0; i < data.result['keywordsComp'].length; i++) {
-                entidades += "<tr> <td>" + data.result['keywordsComp'][i]['label']+"</td><td>"+data.result['keywordsComp'][i]['dbpediaResource']+"</td><td>"+data.result['keywordsComp'][i]['frequency'] +"</td><tr>"
-            }
-            entidades += "</table>"
-        }
-
-        entidades += "<h3>Keywords Simples</h3> "
-        if (data.result['keywordsComp'].length > 0 ) {
-            entidades += "<table> <tr>  <td> <b>Label<b>    </td> <td>   DBpedia     </td><td>    Frecuencia </td></tr>"
-            for (var i = 0; i < data.result['keywordsSimp'].length; i++) {
-                entidades += "<tr> <td>" + data.result['keywordsSimp'][i]['label']+"</td><td>"+data.result['keywordsSimp'][i]['dbpediaResource']+"</td><td>"+data.result['keywordsSimp'][i]['frequency'] +"</td><tr>"
-            }
-            entidades += "</table>"
-
-        }
-
-        entidades += "<p><a href=# id=verJson>Ver Json</a>"
-        document.getElementById("resultado").innerHTML = entidades;
-        $('a#verJson').bind('click', function() {
-            document.getElementById("json").innerHTML = JSON.stringify(data);
-        });
-      });
-      return false;
-    });
-
-    
-  });
-
-
-</script>
-
-<script type="text/javascript">
-var a = "hola mundo"
-function onCheck1() {
-    check1 = document.getElementById("check1")
-    check2 = document.getElementById("check2")
-    check3 = document.getElementById("check3")
-    check4 = document.getElementById("check4")
-    check5 = document.getElementById("check5")
-    if (check1.checked) {
-        check2.checked = false;
-        check3.checked = false;
-        check4.checked = false;
-        check5.checked = false;
-    }
-    else{
-        check2.checked = false;
-        check3.checked = false;
-        check4.checked = false;
-        check5.checked = false;
-    }
-  }
-  function onCheck2() {
-    check1 = document.getElementById("check1")
-    check2 = document.getElementById("check2")
-    check3 = document.getElementById("check3")
-    check4 = document.getElementById("check4")
-    check5 = document.getElementById("check5")
-
-    if (check2.checked) {
-        check1.checked = true;
-        check3.checked = false;
-        check4.checked = false;
-        check5.checked = false;
-    }
-    else{
-        check1.checked = true;
-        check3.checked = false;
-        check4.checked = false;
-        check5.checked = false;
-    }
-}
-    
-function onCheck3() {
-    check1 = document.getElementById("check1")
-    check2 = document.getElementById("check2")
-    check3 = document.getElementById("check3")
-    check4 = document.getElementById("check4")
-    check5 = document.getElementById("check5")
-    if (check3.checked) {
-
-        check1.checked = true;
-        check2.checked = true;
-        check4.checked = false;
-        check5.checked = false;
-    }
-    else{
-        check1.checked = true;
-        check2.checked = true;
-        check4.checked = false;
-        check5.checked = false;
-    }
-}
-   
-function onCheck4() {
-    check1 = document.getElementById("check1")
-    check2 = document.getElementById("check2")
-    check3 = document.getElementById("check3")
-    check4 = document.getElementById("check4")
-    check5 = document.getElementById("check5")
-    if (check4.checked) {
-        check1.checked = true;
-        check2.checked = true;
-        check3.checked = true;
-        check5.checked = false;
-    }
-    else{
-        check1.checked = true;
-        check2.checked = true;
-        check3.checked = true;
-        check5.checked = false;
-    }
-}
-   
-function onCheck5() {
-    check1 = document.getElementById("check1")
-    check2 = document.getElementById("check2")
-    check3 = document.getElementById("check3")
-    check4 = document.getElementById("check4")
-    check5 = document.getElementById("check5")
-    if (check5.checked) {
-        check1.checked = true;
-        check2.checked = true;
-        check3.checked = true;
-        check4.checked = true;
-    }
-}
+ <script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/struct.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/checks.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/tag_m.js') }}"></script>
 
 
 
-</script>
-
-<h1>Disambiguation for Text</h1>
-    <div align="center"><br>
-    <input type="checkbox" id="check1" name="option1" onClick="onCheck1()"> Segmentación en Sentencias
-    <input type="checkbox" id="check2" name="option2" onClick="onCheck2()"> Tokenización
-    <input type="checkbox" id="check3" name="option3" onClick="onCheck3()"> Etiquetado
-    <input type="checkbox" id="check4" name="option4" onClick="onCheck4()"> Extracción de Entidades
-    <input type="checkbox" id="check5" name="option5" onClick="onCheck5()"> Desambiguación y Enlace
-        <br>
-        <br>
+<div id="page" class="back">
+    <h1>Frontal WS</h1>
+    <div class="tableA">
+        <table>
+                <tr>
+                  <td>
+                      <textarea  name=text rows="10" cols="79" id="text">Loja is in Ecuador</textarea> 
+                  </td>
+                  <td>
+                    <input type="checkbox" id="check1" name="option1" onClick="onCheck1()" checked> Segmentación en Sentencias <br>
+                    <input type="checkbox" id="check2" name="option2" onClick="onCheck2()" checked> Tokenización <br>
+                    <input type="checkbox" id="check3" name="option3" onClick="onCheck3()" checked> Etiquetado <br>
+                    <input type="checkbox" id="check4" name="option4" onClick="onCheck4()" checked> Extracción de Entidades <br>
+                    <input type="checkbox" id="check5" name="option5" onClick="onCheck5()" checked> Desambiguación y Enlace 
+                  </td> 
+                </tr>
+                <tr>
+                    <td>
+                        <div id="resulUp">  </div>  
+                    </td>
+                </tr>
+                </table>
     </div>
+    
+    <p><a href=# id="calculate">Procesar</a></p>
+    <div id="resultado">  </div>    
+    <div id="json">  </div>    
+</div>
 
-    <div align="center">
-        <textarea  name=text rows="10" cols="90" id=text>Loja is in Ecuador</textarea> 
-    </div>
-   
-    <p><a href=# id=calculate>Procesar</a>
-
-
-
-<div id=resultado>  </div>    
-<div id=json>  </div>    
 {% endblock %}  

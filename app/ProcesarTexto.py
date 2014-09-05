@@ -43,6 +43,15 @@ class ProcesarTexto():
 	        #	duplaTag.append(a)
 	    return duplaTag
 
+	def tokenizarTreeTagger(self, sentence): 
+	    tagger = treetaggerwrapper.TreeTagger(TAGLANG='en',TAGDIR='/home/fabricio/TreeTagger')
+	    tags = tagger.TagText(sentence)
+	    tokens = []
+	    for tag in tags:
+	        #tokentag.append(tag.split())
+	        tokens.append(tag.split()[0])		
+	    return tokens
+
 	def AplicarChunker(self, sentenciaTageada):
 		grammar = r"""
 		    ENT:
