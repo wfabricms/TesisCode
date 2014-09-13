@@ -10,83 +10,172 @@
         
         function ColocarHtml(rst, rstUp){
 
-            rst += "<p><a href=# id=verJson>Ver Json</a>";
+            //rst += "<p><a href=# id=verJson>Ver Json</a>";
             document.getElementById("resultado").innerHTML = rst;
             document.getElementById("resulUp").innerHTML = rstUp;
         }
         
         function Sentencias(data) {
-            rst = "<h3>Sentencias</h3>"
+            rst = "<div id=\"opcion1\" style=\"position: absolute;\" class=\"center\">"
+            //rst += "<h3>Sentencias</h3>"
                     rst += "<table>"
+                    rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Sentencias </td></tr>"
                     for (var i = 1; i <= data.result['TokensSentencias'].length; i++) 
                     {
-                        rst += "<tr> <td>" + i +" </td><td>"+  data.result['TokensSentencias'][i-1] + "</td></tr>"
+                        rst += "<tr class=\"bodyRest\"> <td class=\"colNum1\">" + i +"</td><td class=\"colData1\">"+  data.result['TokensSentencias'][i-1] + "</td></tr>"    
+                        
+                        
                     }
-                    rst += "</table>"
+            rst += "</table>"
+            rst += "</div>"
             return rst;
         }
 
         function wordTokens(data) {
-            rst = "<h3>Palabras</h3>"
-                    rst += "<table>"
+            rst = "<div id=\"opcion2\" style=\"position: absolute; display: none;\">"
+            
                     cont = 0
                     for (var i = 0; i < data.result['TokensPalabras'].length; i++) 
                     {
+                        rst += "<p class=\"subtRest\">Sentencia #"+(i+1)+"</p>"
+                        rst += "<table>"
+                        rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td></tr>"
                         for (var j = 0; j < data.result['TokensPalabras'][i].length; j++) 
-                        {    
-                            cont = cont +1
-                            rst += "<tr> <td>" + cont +" </td><td>"+  data.result['TokensPalabras'][i][j] + "</td></tr>"
+                        { 
+                        rst += "<tr>"
+                            t = 0
+
+                            while (j < data.result['TokensPalabras'][i].length &&  t != 3 )
+                            {
+                                t ++;
+                                cont ++;
+                                rst += "<td class=\"colNum1\">" + cont +" </td><td class=\"colData1\">"+  data.result['TokensPalabras'][i][j] + "</td>";
+                                j ++;
+                                if(j < data.result['TokensPalabras'][i].length)
+                                {
+                                    rst += "<td></td>"
+                                }
+                            }
+                            rst += "</tr>"
+
                         }
+                        rst += "</table>" 
                     }
-                    rst += "</table>"
+                    
+            rst += "</div>"
             return rst;              // the function returns the product of p1 and p2
         }
 
         function Etiquetado(data) {
-            rst = "<h3>Etiquetas (PartofSpeech)</h3>"
-                    rst += "<table>"
+            rst = "<div id=\"opcion3\" style=\"position: absolute; display: none;\">"
+            
                     cont = 0
                     for (var i = 0; i < data.result['EtiquetadoPalabras'].length; i++) 
                     {
-                        for (var j = 0; j < data.result['EtiquetadoPalabras'][i].length; j++) {
-                            cont ++
-                            rst += "<tr> <td>" + cont +" </td><td>"+  data.result['EtiquetadoPalabras'][i][j] + "</td></tr>"
+                        rst += "<p class=\"subtRest\">Sentencia #"+(i+1)+"</p>"
+                        rst += "<table>"
+                         rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td></tr>"
+                        for (var j = 0; j < data.result['EtiquetadoPalabras'][i].length; j++) 
+                        { 
+                        rst += "<tr>"
+                            t = 0
+
+                            while (j < data.result['EtiquetadoPalabras'][i].length &&  t != 3 )
+                            {
+                                t ++;
+                                cont ++;  
+                                rst += "<td class=\"colNum1\">" + cont +" </td><td class=\"colData1\">"+  data.result['EtiquetadoPalabras'][i][j][0] + "</td><td class=\"colData1\">"+  data.result['EtiquetadoPalabras'][i][j][1]+ "</td>";
+                                j ++;
+                                if(j < data.result['EtiquetadoPalabras'][i].length)
+                                {
+                                    rst += "<td></td>"
+                                }
+                            }
+                            rst += "</tr>"
                         }
+                        rst += "</table>"
                     }
-                    rst += "</table>"
+            rst += "</div>"
             return rst;              // the function returns the product of p1 and p2
         }
 
         function ExtracionEyK(data) {
-            rst = "<h3>Extracionde Entidades y Keywords</h3>"
-            rst += "<h4>Entidades</h4>"
+            rst = "<div id=\"opcion4\" style=\"position: absolute; display: none;\">"
+            rst += "<p class=\"subtRest\">Entidades</p>"
             rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td></tr>"
+            
             for (var i = 0; i < data.result['Entidades'].length; i++) 
             {
-                rst += "<tr> <td>" + (i+1) +" </td><td>"+  data.result['Entidades'][i] + "</td></tr>"
+                rst += "<tr>"
+                t=0;
+                while (i < data.result['Entidades'].length &&  t != 3 )
+                {
+                    t ++;
+                    rst += "<td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['Entidades'][i] + "</td>"
+                    i ++;
+                    if(i < data.result['Entidades'].length)
+                    {
+                        rst += "<td></td>"
+                    }
+                }
+                rst += "</tr>"
             }
             rst += "</table>"
 
-            rst += "<h4>Keywords Compuestas</h4>"
+            rst += "<p class=\"subtRest\">Keywords Compuestas</p>"
             rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td></tr>"
             for (var i = 0; i < data.result['KeywordsCompuestas'].length; i++) 
             {
-                rst += "<tr> <td>" + (i+1) +" </td><td>"+  data.result['KeywordsCompuestas'][i] + "</td></tr>"
+
+                rst += "<tr>"
+                t=0;
+                while (i < data.result['KeywordsCompuestas'].length &&  t != 3 )
+                {
+                    t ++;
+                    rst += "<td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['KeywordsCompuestas'][i] + "</td>"
+                    i ++;
+                    if(i < data.result['KeywordsCompuestas'].length)
+                    {
+                        rst += "<td></td>"
+                    }
+                }
+                rst += "</tr>"
+                
             }
             rst += "</table>"
 
-            rst += "<h4>Keywords Simples</h4>"
+
+            rst += "<p class=\"subtRest\">Keywords Simples</p>"
             rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td></tr>"
             for (var i = 0; i < data.result['KeywordsSimples'].length; i++) 
             {
-                rst += "<tr> <td>" + (i+1) +" </td><td>"+  data.result['KeywordsSimples'][i] + "</td></tr>"
+
+                rst += "<tr>"
+                t=0;
+                while (i < data.result['KeywordsSimples'].length &&  t != 3 )
+                {
+                    t ++;
+                    rst += "<td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['KeywordsSimples'][i] + "</td>"
+                    i ++;
+                    if(i < data.result['KeywordsSimples'].length)
+                    {
+                        rst += "<td></td>"
+                    }
+                }
+                rst += "</tr>"
+                
             }
             rst += "</table>"
+            rst += "</div>"
             return rst;              
         }
 
         function Enlace(data) {
-            rst = "<h3>Enlace</h3>"
+            rst = "<div id=\"opcion5\" style=\"position: absolute; display: none;\">"
+            rst += "<h3>Enlace</h3>"
             rst += "<h4>Entidades</h4>"
             rst += "<table>"
             for (var i = 0; i < data.result['EntidadesDesambiguadas'].length; i++) 
@@ -99,11 +188,12 @@
                 rst += "</tr>";
             }
             rst += "</table>"
+            rst += "</div>"
             return rst;              
         }
 
         function Metadata(data, funcion) {
-            var rstUp = "<div><table id = \"rstUp\">"
+            var rstUp = "<div><table id = \"rstUp\"  style=\"margin: auto;\"> "
             //rstUp += "<tr class=\"metadataTitle\"> <td>Sentencias</td><td>Tokens</td><td>Entidades</td><td>Keywords Compuestas</td><td>Keywords Simples</td><td>Enlaces</td><tr>"
                if (funcion == 1)
                 {
@@ -134,45 +224,150 @@
                 return rstUp
         }
 
-     
+        function HeadMenu(funcion) {
+            var rstUp = "<span class=\"menu\"><ul>"
+
+               if (funcion == 1)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a></li>"
+                } else if (funcion == 2)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens»</a></li>"
+                    
+                } else if (funcion == 3)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens»</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas PartofSpeech)</a></li>"
+                   
+                } else if (funcion == 4)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens»</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas PartofSpeech)</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion4')\" href=\"#\" title=\"Opción 4\" class=\"\">Extración</a></li>"
+                
+                } else if (funcion == 5)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens»</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas PartofSpeech)</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion4')\" href=\"#\" title=\"Opción 4\" class=\"\">Extración</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion5')\" href=\"#\" title=\"Opción 5\" class=\"\">Enlace</a></li>"
+                    
+                }
+                rstUp += "<li><a id= \"verJson\" onclick=\"present(this,'#json')\" href=\"#\" title=\"Opción 6\" class=\"\">Json</a></li>"
+                rstUp += "</ul></span>"
+                return rstUp
+        }
+
+        function HeadMenu2(funcion) {
+
+
+            var rstUp = "<section class=\"color-1\">"
+            rstUp += "<nav class=\"cl-effect-1\">"
+                
+
+               if (funcion == 1)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a>"
+                    
+                } else if (funcion == 2)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens»</a>"
+                    
+                    
+                } else if (funcion == 3)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens»</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas PartofSpeech)</a>"
+                    
+                   
+                } else if (funcion == 4)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens»</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas PartofSpeech)</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion4')\" href=\"#\" title=\"Opción 4\" class=\"\">Extración</a>"
+                
+                } else if (funcion == 5)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias»</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens»</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas PartofSpeech)</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion4')\" href=\"#\" title=\"Opción 4\" class=\"\">Extración</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion5')\" href=\"#\" title=\"Opción 5\" class=\"\">Enlace</a>"
+                    
+                }
+                rstUp += "<a id= \"verJson\" onclick=\"present(this,'#json')\" href=\"#\" title=\"Opción 6\" class=\"\">Json</a>"
+                
+
+                rstUp += "</nav></section>"
+                return rstUp
+        }
+
 
         function llamaServicio(servicio, funcion)
         {
             $.getJSON($SCRIPT_ROOT + servicio, {
             text: $('textarea#text').val()
             }, function(data) {
-                var rst = "";
+                var rst = "<div class = \"contenido\" >";
+                
+                //rst += "<a href=\"javascript:location.reload()\">Actualizar</a><br>"
+                
+
+                rst += "<div id = \"contenido_pestanas\" style=\"margin: auto;\">";
+                rst += HeadMenu2(funcion);
+                
+
+                //<div id="opcion1" style="position: absolute; display: block;">
+                //<h3>Este es el contenido de la Opción 1</h3>
+                //<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                //    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                //    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                //</p>
+                //</div>
+
                 var rstUp = ""
                 if (funcion == 1)
                 {
-                    rst = Sentencias(data);
+                    rst+= Sentencias(data);
                 } else if (funcion == 2)
                 {
-                    rst = wordTokens(data);
+                    rst += wordTokens(data);
                     rst += Sentencias(data);
                 } else if (funcion == 3)
                 {
-                    rst = Etiquetado(data);
+                    rst += Etiquetado(data);
                     rst += wordTokens(data);
                     rst += Sentencias(data);
                 } else if (funcion == 4)
                 {
-                    rst = ExtracionEyK(data);
+                    rst += ExtracionEyK(data);
                     rst += Etiquetado(data);
                     rst += wordTokens(data);
                     rst += Sentencias(data);
                 } else if (funcion == 5)
                 {
-                    rst = Enlace(data);
+                    
+                    rst += Enlace(data);
                     rst += ExtracionEyK(data);
                     rst += Etiquetado(data);
                     rst += wordTokens(data);
                     rst += Sentencias(data);
                 }
                 rstUp = Metadata(data, funcion)
+                
+                rst += "<div id=\"json\" style=\"position: absolute; display: none;\"> <textarea id=\"tjson\" rows=\"9\" cols=\"85\"  readonly> </textarea> </div>  ";
+                rst += "</div>"
+                rst += "</div>"
                 ColocarHtml(rst,rstUp);
                 $('a#verJson').bind('click', function() {
-            document.getElementById("json").innerHTML = JSON.stringify(data);
+            document.getElementById("tjson").innerHTML = JSON.stringify(data);
         });
             });
         }

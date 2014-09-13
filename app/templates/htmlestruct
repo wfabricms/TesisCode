@@ -1,0 +1,28 @@
+<div id="page" class="back">
+    <h1>Frontal WS</h1>
+    <div class="tableA">
+        <table>
+                <tr>
+                  <td>
+                      <textarea  name=text rows="10" cols="79" id="text">Loja is in Ecuador</textarea> 
+                  </td>
+                  <td>
+                    <input type="checkbox" id="check1" name="option1" onClick="onCheck1()" checked> Segmentación en Sentencias <br>
+                    <input type="checkbox" id="check2" name="option2" onClick="onCheck2()" checked> Tokenización <br>
+                    <input type="checkbox" id="check3" name="option3" onClick="onCheck3()" checked> Etiquetado <br>
+                    <input type="checkbox" id="check4" name="option4" onClick="onCheck4()" checked> Extracción de Entidades <br>
+                    <input type="checkbox" id="check5" name="option5" onClick="onCheck5()" checked> Desambiguación y Enlace 
+                  </td> 
+                </tr>
+                <tr>
+                    <td>
+                        <div id="resulUp">  </div>  
+                    </td>
+                </tr>
+                </table>
+    </div>
+    
+    <p><a href=# id="calculate">Procesar</a></p>
+    <div id="resultado">  </div>    
+    <div id="json">  </div>    
+</div>
