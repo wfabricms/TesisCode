@@ -8,8 +8,8 @@ from urllib import quote_plus
 class ProcesarTexto():
 	def validateTextLenguage(self, text):
 		# Lista de idiomas disponibles en la nltk
-  		#languages = ["spanish","english","dutch","finnish","german","italian","portuguese","turkish","danish","french","hungarian","norwegian","russian","swedish"]
-  		languages = ["english"]
+  		languages = ["spanish","english","dutch","finnish","german","italian","portuguese","turkish","danish","french","hungarian","norwegian","russian","swedish"]
+  		#languages = ["english"]
 		# Texto a analizar
 		text = "Texto a analizar y del cual detectar el idioma en el que se encuentra"
  		# Dividimos el texto de entrada en tokens o palabras unicas

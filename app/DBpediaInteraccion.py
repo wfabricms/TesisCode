@@ -149,7 +149,7 @@ class DbepdiaInteraccionRecursos():
 		servidor = "http://apolo.utpl.edu.ec/vtitanio/sparql"
 		for recurso in recursos:
 			if recurso['dbpediaResource'] != "" :
-				print "TYPE DATA >> ", recurso['dbpediaResource']
+				#print "TYPE DATA >> ", recurso['dbpediaResource']
 				results = self.ejecutarQuery(self.getQueryType(recurso['dbpediaResource']),servidor)
 				recurso['dbpediaResourceType'] = self.dataTypeExtract(results)
 		return recursos

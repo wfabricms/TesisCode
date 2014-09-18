@@ -324,7 +324,7 @@
             }, function(data) {
                 if ('err' in data.result){
                     alert(data.result['err'])    
-                     var rst = "<div class = \"contenido\" >error: "+data.result['err']+" </div<";
+                     var rst = "<div class = \"contenido\" >error: "+data.result['err']+" </div>";
                      var rstUp = ""
                 }else{
                     var rst = "<div class = \"contenido\" >";

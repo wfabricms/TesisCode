@@ -6,7 +6,7 @@ class ConstruccionServicios():
 	#objProcesarTexto = ProcesarTexto()
 	def TokenizacionSentencias(self, text):
 		if len(text)  < 2:
-			#print "err segementacion"
+			print "err segementacion"
 			return {"err":"error no text"}
 		objProcesarTexto = ProcesarTexto()
 		text = objProcesarTexto.validateTextCharacter(text)
@@ -16,17 +16,17 @@ class ConstruccionServicios():
 		data['TokensSentencias'] = listSentencias
 		#print data
 		print data['TokensSentencias'][0]
-		if objProcesarTexto.validateTextLenguage("hola mundo") == "english" :
-			print "SI es ingles"
-		else:
-			print "NO ES INGLES"
+		if objProcesarTexto.validateTextLenguage("hola mundo") != "english" :
+			print "NO es ingles"
+			return {"err":"Language not supported "}
+		
 		return data
 
 	def EtiquetarTT(self, text):
 		data = self.TokenizacionSentencias(text)
 		if "err" in data:
 			#print "err etiquetqad"
-			return {"err":"error no text"}
+			return data
 		EtiquetasPalabras = []
 		TokensEnPalabras = []
 		palabras = []
@@ -50,7 +50,7 @@ class ConstruccionServicios():
 	def TokenizarTT(self, text):
 		data = self.TokenizacionSentencias(text)
 		if "err" in data:
-			return {"err":"error no text"}
+			return data
 		TokensEnPalabras = []
 		#global objProcesarTexto
 		objProcesarTexto = ProcesarTexto()
@@ -69,7 +69,7 @@ class ConstruccionServicios():
 	def ExtracionEntidadesAndKeywords(self, text, d):
 		data = self.EtiquetarTT(text)
 		if "err" in data:
-			return {"err":"error no text"}
+			return data
 		#global objProcesarTexto
 		objProcesarTexto = ProcesarTexto()
 		data['KeywordsSimples'] = []
@@ -80,18 +80,20 @@ class ConstruccionServicios():
 		for sentenciaTokenizada in data['EtiquetadoPalabras']:
 			entidades = []
 			listaEntidades = []
+			KeywordsCompuestas = []
 			data['KeywordsSimples'] = data['KeywordsSimples'] + [w for (w, x) in sentenciaTokenizada if len(w)>1  and x =='NN' or x =='NNS']
 			treeChunk = objProcesarTexto.AplicarChunker(sentenciaTokenizada)
 			for x in treeChunk.subtrees():
 				if x.node == 'SUST':	
 					word = [w[0] for w in x.leaves()]
 					name = " ".join(word)
-					if len(name) >1 and name not in data['KeywordsSimples']: data['KeywordsCompuestas'].append(name)
+					if len(name) >1 and name not in data['KeywordsSimples']: KeywordsCompuestas.append(name)
 				if x.node == 'ENTCOMP' or x.node == 'ENT':
 					word = [w[0] for w in x.leaves()]
 					name = " ".join(word)
 					if len(name) >1: entidades.append(name)
 			data['Entidades'] = data['Entidades']  + entidades
+			data['KeywordsCompuestas'] = data['KeywordsCompuestas']  + KeywordsCompuestas
 			data['NumKeywordsSimples'] = len(data['KeywordsSimples'])
 			data['NumKeywordsCompuestas'] = len(data['KeywordsCompuestas'])
 			data['NumEntidades'] = len(data['Entidades'])
@@ -99,24 +101,22 @@ class ConstruccionServicios():
 				objDbInteracion = DbepdiaInteraccionRecursos()
 				objDesamb = Desambiguacion()
 				#for entidad in entidades+data['KeywordsSimples']+data['KeywordsCompuestas']:
-				for entidad in entidades:
-				#for entidad in entidades + data['KeywordsCompuestas']:
+				#for entidad in entidades:
+				for entidad in entidades + KeywordsCompuestas:
+					print "  >>  ", entidad
 					estruDat = {"label":"", "frequency":"","dbpediaResource":"","dbpediaResourceType":[],"DBpedRList":[], "type":0}
 					estruDat["label"] = entidad
 					for i in data['EntidadesDesambiguadas']:
-						#print "RRRRRRRRRRRRRRRRR",i
 						if entidad in i['label']:
-							print "ENTIDAD IGUAL O CONTIENE>> ", entidad, " >> ", i['label']
+							#print "ENTIDAD IGUAL O CONTIENE>> ", entidad, " >> ", i['label']
 							estruDat['DBpedRList'] = i['DBpedRList']
 							break
 					if estruDat['DBpedRList'] == []:
 						estruDat['DBpedRList'] = objDbInteracion.extraerListRecursoDBpedia(entidad)
-
 					listaEntidades.append(estruDat)
 				data['EntidadesDesambiguadas'] += objDesamb.LeskAlgoritm(listaEntidades, objDbInteracion.ExtraerNombres(data['TokensSentencias'][data['EtiquetadoPalabras'].index(sentenciaTokenizada)]))
 				if data['EtiquetadoPalabras'].index(sentenciaTokenizada) == len (data['EtiquetadoPalabras']) -1: 
 					#for i in data['EntidadesDesambiguadas']:
-
 					data['EntidadesDesambiguadas'] = objDbInteracion.TypeExtract(data['EntidadesDesambiguadas'])
 				data['NumEntidadesDesambiguadas'] = len(data['EntidadesDesambiguadas'])
 		return data
