@@ -5,17 +5,28 @@ from Desambiguacion import Desambiguacion
 class ConstruccionServicios():
 	#objProcesarTexto = ProcesarTexto()
 	def TokenizacionSentencias(self, text):
-		data = {}
-		#global objProcesarTexto
+		if len(text)  < 2:
+			#print "err segementacion"
+			return {"err":"error no text"}
 		objProcesarTexto = ProcesarTexto()
+		text = objProcesarTexto.validateTextCharacter(text)
+		data = {}
 		listSentencias = objProcesarTexto.tokenizarSentencias(text)
 		data['NumSentencias'] =  len(listSentencias)
 		data['TokensSentencias'] = listSentencias
 		#print data
+		print data['TokensSentencias'][0]
+		if objProcesarTexto.validateTextLenguage("hola mundo") == "english" :
+			print "SI es ingles"
+		else:
+			print "NO ES INGLES"
 		return data
 
 	def EtiquetarTT(self, text):
 		data = self.TokenizacionSentencias(text)
+		if "err" in data:
+			#print "err etiquetqad"
+			return {"err":"error no text"}
 		EtiquetasPalabras = []
 		TokensEnPalabras = []
 		palabras = []
@@ -28,8 +39,8 @@ class ConstruccionServicios():
 			palabras = []
 			for token in restTokensPalabras:
 				palabras.append(token[0])
-				print token[0]
-				print palabras
+				#print token[0]
+				#print palabras
 			EtiquetasPalabras.append(restTokensPalabras)
 			TokensEnPalabras.append(palabras)
 		data['EtiquetadoPalabras']  = EtiquetasPalabras 
@@ -38,6 +49,8 @@ class ConstruccionServicios():
 
 	def TokenizarTT(self, text):
 		data = self.TokenizacionSentencias(text)
+		if "err" in data:
+			return {"err":"error no text"}
 		TokensEnPalabras = []
 		#global objProcesarTexto
 		objProcesarTexto = ProcesarTexto()
@@ -55,6 +68,8 @@ class ConstruccionServicios():
 
 	def ExtracionEntidadesAndKeywords(self, text, d):
 		data = self.EtiquetarTT(text)
+		if "err" in data:
+			return {"err":"error no text"}
 		#global objProcesarTexto
 		objProcesarTexto = ProcesarTexto()
 		data['KeywordsSimples'] = []
@@ -64,6 +79,7 @@ class ConstruccionServicios():
 		data['EntidadesDesambiguadas'] = []
 		for sentenciaTokenizada in data['EtiquetadoPalabras']:
 			entidades = []
+			listaEntidades = []
 			data['KeywordsSimples'] = data['KeywordsSimples'] + [w for (w, x) in sentenciaTokenizada if len(w)>1  and x =='NN' or x =='NNS']
 			treeChunk = objProcesarTexto.AplicarChunker(sentenciaTokenizada)
 			for x in treeChunk.subtrees():
@@ -83,13 +99,24 @@ class ConstruccionServicios():
 				objDbInteracion = DbepdiaInteraccionRecursos()
 				objDesamb = Desambiguacion()
 				#for entidad in entidades+data['KeywordsSimples']+data['KeywordsCompuestas']:
-				#for entidad in entidades:
-				for entidad in entidades + data['KeywordsCompuestas']:
-					estruDat = {"label":"", "frequency":"","dbpediaResource":"","DBpedRList":[], "type":0}
+				for entidad in entidades:
+				#for entidad in entidades + data['KeywordsCompuestas']:
+					estruDat = {"label":"", "frequency":"","dbpediaResource":"","dbpediaResourceType":[],"DBpedRList":[], "type":0}
 					estruDat["label"] = entidad
-					estruDat['DBpedRList'] = objDbInteracion.extraerListRecursoDBpedia(entidad)
+					for i in data['EntidadesDesambiguadas']:
+						#print "RRRRRRRRRRRRRRRRR",i
+						if entidad in i['label']:
+							print "ENTIDAD IGUAL O CONTIENE>> ", entidad, " >> ", i['label']
+							estruDat['DBpedRList'] = i['DBpedRList']
+							break
+					if estruDat['DBpedRList'] == []:
+						estruDat['DBpedRList'] = objDbInteracion.extraerListRecursoDBpedia(entidad)
+
 					listaEntidades.append(estruDat)
+				data['EntidadesDesambiguadas'] += objDesamb.LeskAlgoritm(listaEntidades, objDbInteracion.ExtraerNombres(data['TokensSentencias'][data['EtiquetadoPalabras'].index(sentenciaTokenizada)]))
 				if data['EtiquetadoPalabras'].index(sentenciaTokenizada) == len (data['EtiquetadoPalabras']) -1: 
-					data['EntidadesDesambiguadas'] = objDesamb.LeskAlgoritm(listaEntidades, objDbInteracion.ExtraerNombres(data['TokensSentencias'][data['EtiquetadoPalabras'].index(sentenciaTokenizada)]))
+					#for i in data['EntidadesDesambiguadas']:
+
+					data['EntidadesDesambiguadas'] = objDbInteracion.TypeExtract(data['EntidadesDesambiguadas'])
 				data['NumEntidadesDesambiguadas'] = len(data['EntidadesDesambiguadas'])
 		return data

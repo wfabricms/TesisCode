@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+import sys
+import nltk
+import treetaggerwrapper
+
+def Etiquetar(sentence): 
+    tagger = treetaggerwrapper.TreeTagger(TAGLANG='es',TAGDIR='')
+    tags = tagger.TagText(sentence.decode('utf-8'))
+    for tag in tags:
+        print tag
+
+sentence = """Nosotros vimos un perro amarillo"""
+
+""", limita al norte con Colombia, al este y sur con Perú, y al oeste con el océano Pacífico. Debe su nombre a la línea imaginaria del ecuador, que atraviesa el país y divide a la Tierra en dos hemisferios. Las islas Galápagos o archipiélago de Colón, localizadas en el Pacífico a unos 1.000 km de la costa, pertenecen a Ecuador.""" 
+
+"""El país tiene una superficie de 272.045 km² contando con las Galápagos. La capital es Quito, una de las más antiguas de América del Sur."""
+
+"""Es posible trascender y enriquecer esas relaciones diplomáticas con todo el bagaje documental que durante más de dos siglos han generado los ecuatorianos y franceses en los distintos campos del quehacer humano; esto es, la cultura, la educación y la ciencia. Y es así entonces que la Exposición Ecuador, una historia en común y que el Catálogo que hoy tienen en sus manos se empiezan a elaborar. Tomando en cuenta, por supuesto, que frente a un desafío tan grande como es mostrar una historia tan profunda y secular, sólo es posible a través de una muestra. Lo que presenta la exposición y lo que este catálogo incorpora se logra gracias a la colaboración de un excelente equipo de investigadores, escritores, científicos e instituciones"""
+Etiquetar(sentence)
+print ""
+"""tokens = nltk.word_tokenize(sentence)
+for t in tokens:
+    Etiquetar(t)"""

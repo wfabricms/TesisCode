@@ -62,13 +62,13 @@ class DbepdiaInteraccionRecursos():
 		uris = []
 		for result in results["results"]["bindings"]:
 			if "amb1" in result.keys():
-				if result["amb1"]["value"]  not in uris and "http://dbpedia.org/resource/" in result["amb1"]["value"]:  uris.append(result["amb1"]["value"])	
+				if result["amb1"]["value"]  not in uris and "http://dbpedia.org/resource/" in result["amb1"]["value"] and "Category:" not in result["amb1"]["value"]: uris.append(result["amb1"]["value"])	
 			elif "redir" in result.keys():
-				if result["redir"]["value"] not in uris and "http://dbpedia.org/resource/" in result["redir"]["value"]: uris.append(result["redir"]["value"])	
+				if result["redir"]["value"] not in uris and "http://dbpedia.org/resource/" in result["redir"]["value"]  and "Category:" not in result["redir"]["value"]: uris.append(result["redir"]["value"])	
 			elif "amb" in result.keys():
-				if result["amb"]["value"]   not in uris and "http://dbpedia.org/resource/" in result["amb"]["value"]:   uris.append(result["amb"]["value"])	
+				if result["amb"]["value"]   not in uris and "http://dbpedia.org/resource/" in result["amb"]["value"]  and "Category:" not in result["amb"]["value"]: uris.append(result["amb"]["value"])	
 			else:
-				if result["x"]["value"]     not in uris and "http://dbpedia.org/resource/" in result["x"]["value"]:     uris.append(result["x"]["value"])		
+				if result["x"]["value"]     not in uris and "http://dbpedia.org/resource/" in result["x"]["value"]  and "Category:" not in result["x"]["value"]: uris.append(result["x"]["value"])		
 		return uris
 
 	def ejecutarQuery(self, SparqlQuery, servidor):
@@ -85,8 +85,8 @@ class DbepdiaInteraccionRecursos():
 		servidor = "http://apolo.utpl.edu.ec/vtitanio/sparql"
 		
 		filterText = self.PreparaFiltroTexto(recurso)
-		print (filterText)
-		print (recurso)
+		#print (filterText)
+		#print (recurso)
 		if recurso == filterText:
 			results = self.ejecutarQuery(self.getQuery(recurso),servidor)
 		else:
@@ -125,5 +125,31 @@ class DbepdiaInteraccionRecursos():
 
 	def ExtraerNombres(self, sentence):
 	 	ett = objProcesarTexto.etiquetar(objProcesarTexto.tokenizarPalabras(sentence))
-		abstract = [w for (w, x) in ett if len(w)>2  and x =='NNP' or x =='NNPS' or x =='NN' or x =='NNS']
+	 	abstract = []
+		for (w, x) in ett:
+			if len(w)>2 and x =='NNP' or x =='NNPS' or x =='NN' or x =='NNS'or x =='JJ':
+				#if len(w)>2  and x =='NNP' and w not in abstract:
+				#if w not in abstract: 
+				abstract.append(w.capitalize())
 		return abstract
+
+	def dataTypeExtract(self, results):
+		uris = []
+		for result in results["results"]["bindings"]:
+			if "types" in result.keys():
+				uris.append(result["types"]["value"])
+		return uris
+
+	def getQueryType(elf, term):
+		querytype = """select distinct * where {<"""+term+"""> rdf:type ?types.}"""
+		return querytype
+
+	def TypeExtract(self, recursos):
+		a = [1,2,3]
+		servidor = "http://apolo.utpl.edu.ec/vtitanio/sparql"
+		for recurso in recursos:
+			if recurso['dbpediaResource'] != "" :
+				print "TYPE DATA >> ", recurso['dbpediaResource']
+				results = self.ejecutarQuery(self.getQueryType(recurso['dbpediaResource']),servidor)
+				recurso['dbpediaResourceType'] = self.dataTypeExtract(results)
+		return recursos

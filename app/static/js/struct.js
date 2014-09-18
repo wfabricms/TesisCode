@@ -14,7 +14,7 @@
             document.getElementById("resultado").innerHTML = rst;
             document.getElementById("resulUp").innerHTML = rstUp;
         }
-        
+
         function Sentencias(data) {
             rst = "<div id=\"opcion1\" style=\"position: absolute;\" class=\"center\">"
             //rst += "<h3>Sentencias</h3>"
@@ -23,8 +23,6 @@
                     for (var i = 1; i <= data.result['TokensSentencias'].length; i++) 
                     {
                         rst += "<tr class=\"bodyRest\"> <td class=\"colNum1\">" + i +"</td><td class=\"colData1\">"+  data.result['TokensSentencias'][i-1] + "</td></tr>"    
-                        
-                        
                     }
             rst += "</table>"
             rst += "</div>"
@@ -40,7 +38,7 @@
                         rst += "<p class=\"subtRest\">Sentencia #"+(i+1)+"</p>"
                         rst += "<table>"
                         rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td></tr>"
-                        for (var j = 0; j < data.result['TokensPalabras'][i].length; j++) 
+                        for (var j = 0; j < data.result['TokensPalabras'][i].length; ) 
                         { 
                         rst += "<tr>"
                             t = 0
@@ -75,7 +73,7 @@
                         rst += "<p class=\"subtRest\">Sentencia #"+(i+1)+"</p>"
                         rst += "<table>"
                          rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td></tr>"
-                        for (var j = 0; j < data.result['EtiquetadoPalabras'][i].length; j++) 
+                        for (var j = 0; j < data.result['EtiquetadoPalabras'][i].length;) 
                         { 
                         rst += "<tr>"
                             t = 0
@@ -105,7 +103,7 @@
             rst += "<table>"
             rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td></tr>"
             
-            for (var i = 0; i < data.result['Entidades'].length; i++) 
+            for (var i = 0; i < data.result['Entidades'].length;) 
             {
                 rst += "<tr>"
                 t=0;
@@ -126,7 +124,7 @@
             rst += "<p class=\"subtRest\">Keywords Compuestas</p>"
             rst += "<table>"
             rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td></tr>"
-            for (var i = 0; i < data.result['KeywordsCompuestas'].length; i++) 
+            for (var i = 0; i < data.result['KeywordsCompuestas'].length; ) 
             {
 
                 rst += "<tr>"
@@ -150,7 +148,7 @@
             rst += "<p class=\"subtRest\">Keywords Simples</p>"
             rst += "<table>"
             rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td></tr>"
-            for (var i = 0; i < data.result['KeywordsSimples'].length; i++) 
+            for (var i = 0; i < data.result['KeywordsSimples'].length; ) 
             {
 
                 rst += "<tr>"
@@ -175,15 +173,25 @@
 
         function Enlace(data) {
             rst = "<div id=\"opcion5\" style=\"position: absolute; display: none;\">"
-            rst += "<h3>Enlace</h3>"
-            rst += "<h4>Entidades</h4>"
+            rst += "<p class=\"subtRest\">Entidades</p>"
             rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidad </td><td class=\"colData2\"> Tipo </td><td class=\"colData2\"> Enlace </td></tr>"
             for (var i = 0; i < data.result['EntidadesDesambiguadas'].length; i++) 
             {
-                rst += "<tr> <td>" + (i+1) +" </td><td>"+  data.result['EntidadesDesambiguadas'][i]['label'] ; 
+                rst += "<tr> <td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['EntidadesDesambiguadas'][i]['label'] +"</td>" ; 
 
                 if (data.result['EntidadesDesambiguadas'][i]['dbpediaResource'])
-                    rst += "</td><td>"+  "<a href=\""+data.result['EntidadesDesambiguadas'][i]['dbpediaResource'] +"\" >DBpedia</a> "+ "</td>";
+                {
+                    rst += "<td  class=\"colData1\">"
+                    for ( var j = 0; j <  data.result['EntidadesDesambiguadas'][i]['dbpediaResourceType'].length; j++)
+                    {
+                        rst += "<a href = \""+data.result['EntidadesDesambiguadas'][i]['dbpediaResourceType'][j] + "\">"+ data.result['EntidadesDesambiguadas'][i]['dbpediaResourceType'][j] +"</a><br>"
+                    }
+                    rst += "</td>"
+                    rst += "<td class=\"colData1\">"+  "<a href=\""+data.result['EntidadesDesambiguadas'][i]['dbpediaResource'] +"\" >DBpedia</a> "+ "</td>";
+                }else{
+                    rst += "<td  class=\"colData1\"></td><td  class=\"colData1\"></td>"
+                }
 
                 rst += "</tr>";
             }
@@ -310,70 +318,91 @@
         }
 
 
-        function llamaServicio(servicio, funcion)
-        {
+        function llamaServicio(servicio, funcion){
             $.getJSON($SCRIPT_ROOT + servicio, {
-            text: $('textarea#text').val()
+            text: $('textarea#textMain').val()
             }, function(data) {
-                var rst = "<div class = \"contenido\" >";
-                
-                //rst += "<a href=\"javascript:location.reload()\">Actualizar</a><br>"
-                
-
-                rst += "<div id = \"contenido_pestanas\" style=\"margin: auto;\">";
-                rst += HeadMenu2(funcion);
-                
-
-                //<div id="opcion1" style="position: absolute; display: block;">
-                //<h3>Este es el contenido de la Opción 1</h3>
-                //<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                //    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                //    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                //</p>
-                //</div>
-
-                var rstUp = ""
-                if (funcion == 1)
-                {
-                    rst+= Sentencias(data);
-                } else if (funcion == 2)
-                {
-                    rst += wordTokens(data);
-                    rst += Sentencias(data);
-                } else if (funcion == 3)
-                {
-                    rst += Etiquetado(data);
-                    rst += wordTokens(data);
-                    rst += Sentencias(data);
-                } else if (funcion == 4)
-                {
-                    rst += ExtracionEyK(data);
-                    rst += Etiquetado(data);
-                    rst += wordTokens(data);
-                    rst += Sentencias(data);
-                } else if (funcion == 5)
-                {
+                if ('err' in data.result){
+                    alert(data.result['err'])    
+                     var rst = "<div class = \"contenido\" >error: "+data.result['err']+" </div<";
+                     var rstUp = ""
+                }else{
+                    var rst = "<div class = \"contenido\" >";
+                    rst += "<div id = \"contenido_pestanas\" style=\"margin: auto;\">";
+                    rst += HeadMenu2(funcion);
+                    var rstUp = ""
+                    if (funcion == 1)
+                    {
+                        rst+= Sentencias(data);
+                    } else if (funcion == 2)
+                    {
+                        rst += wordTokens(data);
+                        rst += Sentencias(data);
+                    } else if (funcion == 3)
+                    {
+                        rst += Etiquetado(data);
+                        rst += wordTokens(data);
+                        rst += Sentencias(data);
+                    } else if (funcion == 4)
+                    {
+                        rst += ExtracionEyK(data);
+                        rst += Etiquetado(data);
+                        rst += wordTokens(data);
+                        rst += Sentencias(data);
+                    } else if (funcion == 5)
+                    {                    
+                        rst += Enlace(data);
+                        rst += ExtracionEyK(data);
+                        rst += Etiquetado(data);
+                        rst += wordTokens(data);
+                        rst += Sentencias(data);
+                    }
+                    rstUp = Metadata(data, funcion)
                     
-                    rst += Enlace(data);
-                    rst += ExtracionEyK(data);
-                    rst += Etiquetado(data);
-                    rst += wordTokens(data);
-                    rst += Sentencias(data);
+                    rst += "<div id=\"json\" style=\"position: absolute; display: none;\"> <textarea id=\"tjson\" rows=\"11\" cols=\"85\"  readonly> </textarea> </div>  ";
+                    rst += "</div>"
+                    rst += "</div>"
                 }
-                rstUp = Metadata(data, funcion)
+                    ColocarHtml(rst,rstUp);
+                    $('a#verJson').bind('click', function() {
+                    document.getElementById("tjson").innerHTML = JSON.stringify(data);
+                    });
                 
-                rst += "<div id=\"json\" style=\"position: absolute; display: none;\"> <textarea id=\"tjson\" rows=\"9\" cols=\"85\"  readonly> </textarea> </div>  ";
-                rst += "</div>"
-                rst += "</div>"
-                ColocarHtml(rst,rstUp);
-                $('a#verJson').bind('click', function() {
-            document.getElementById("tjson").innerHTML = JSON.stringify(data);
-        });
             });
         }
+        
+        -->        
+        var rst = "<div class=\"spinner\"> "+
+              "<div class=\"spinner-container container1\"> " +
+                "<div class=\"circle1\"></div> " +
+                "<div class=\"circle2\"></div> " +
+                "<div class=\"circle3\"></div> " +
+                "<div class=\"circle4\"></div> " +
+              "</div> " +
+              "<div class=\"spinner-container container2\"> " +
+                "<div class=\"circle1\"></div> " +
+                "<div class=\"circle2\"></div> " +
+                "<div class=\"circle3\"></div> " +
+                "<div class=\"circle4\"></div> " +
+              "</div> " +
+              "<div class=\"spinner-container container3\"> " +
+                "<div class=\"circle1\"></div> " +
+                "<div class=\"circle2\"></div> " +
+                "<div class=\"circle3\"></div> " +
+                "<div class=\"circle4\"></div> " +
+              "</div> " +            "</div>" 
+
+        
+        
+        var rstUp = "<div class=\"spinner\">  <div class=\"bounce1\"></div>  <div class=\"bounce2\"></div>  <div class=\"bounce3\"></div> </div>"
+        rstUp = ""
 
 
-         if(check5.checked)
+
+
+        ColocarHtml(rst, rstUp)
+
+        if(check5.checked)
         {
             llamaServicio('/v1/Desambiguacion',5)
         } else if(check4.checked)

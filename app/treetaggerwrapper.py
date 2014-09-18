@@ -710,7 +710,6 @@ class TreeTagger (object) :
 
     #-------------------------------------------------------------------------
     def SetTagger(self,kargs) :
-        print "XXXXXXXXXXXX",kargs
         """Set tagger paths, files, and options.
 
         Internal use.
@@ -724,6 +723,7 @@ class TreeTagger (object) :
             logger.error("Cant locate TreeTagger directory via TAGDIR.")
             raise TreeTaggerError,"Cant locate TreeTagger directory via TAGDIR."
         self.tagdir = os.path.abspath(self.tagdir)
+        #self.tagdir = os.getcwd() + "/" + self.tagdir
         if not os.path.isdir(self.tagdir) :
             logger.error("Bad TreeTagger directory: %s",self.tagdir)
             raise TreeTaggerError,"Bad TreeTagger directory: "+self.tagdir

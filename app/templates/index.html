@@ -1,136 +1,105 @@
-<html lang="es"><!--Se define el lenguaje de la página como español--><head>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript">$SCRIPT_ROOT = "";</script>
-    <script type="text/javascript" src="/static/js/struct.js"></script>
-    <script type="text/javascript" src="/static/js/checks.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){ // Script del Navegador
-      $('#contenido_pestanas div').css('position', 'absolute').not(':first').hide();
-    });
+  <!DOCTYPE html>
+    <html>
+        <head>
+            <title>jQM Complex Demo</title>
 
-    function present(b, t) {
-      $('#contenido_pestanas a').removeClass('aqui');
-      $(b).addClass('aqui');
-      $('#contenido_pestanas div').fadeOut(350);
-      $(t).fadeIn(100);
-       return false;
-    }
-    </script>
-    <meta charset="utf-8"><!--La codificacion del documento es UTF-8-->
-    <title>Procesamiento de Texto - WS integrador</title><!--Se recomienda un titulo diferente para cada página del sitio web-->
-    
-  <style type="text/css"></style></head>
- 
-  <body class="single demo">
-    <header>
-      
- 
-      <nav><!--Barra de navegación-->
-        <!--Elementos de la barra de navegación-->
-        <div><a href="http://www.utpl.edu.ec">UTPL</a></div>
-      <hr>
-      </nav>
-      <hgroup>
-        <!-- <h1>Zchumager</h1>
-        <h4>Enseñando para aprender</h4> <!Slogan de la pagina-->
-        <h2>Frontal WS</h2>
-      </hgroup>
-    </header>
- 
-    <section>
-
-      <div id="page" class="back">
-    
-    <div class="tableA">
-        <table>
-                <tbody><tr>
-                  <td>
-                      <textarea name="text" rows="8" cols="70" id="text">Loja is in Ecuador</textarea> 
-                      <div class="controls">
-                      <a href="#" id="calculate" class="medium button go">Procesar</a>
-                    <a href="#" id="reset" class="medium button reset">Borrar</a>
-                      </div>
-                  </td>
-                  <td class="checks">
-                  <div>
-                    <label>
-                      <input type="checkbox" id="check1" name="option1" onclick="onCheck1()" checked="">
-                      <span class="mcheck">Segmentación en Sentencias</span>
-                    </label>
-                    <label>
-                      <input type="checkbox" id="check2" name="option2" onclick="onCheck2()" checked="">
-                      <span class="mcheck">Tokenización</span>
-                    </label>
-                    <label>
-                      <input type="checkbox" id="check3" name="option3" onclick="onCheck3()" checked="">
-                      <span class="mcheck">Etiquetado</span>
-                    </label>
-                    <label>
-                      <input type="checkbox" id="check4" name="option4" onclick="onCheck4()" checked="">
-                      <span class="mcheck">Extracción de Entidades</span>
-                    </label>
-                    <label>
-                      <input type="checkbox" id="check5" name="option5" onclick="onCheck5()" checked="">
-
-                      <span class="mcheck">Desambiguación y Enlace  <!--  <img src="/static/img/candado.png" alt="Smiley face" height="10" width="10">--></span>
-                    </label>
-
-                    <!--
-                    <input type="checkbox" id="check1" name="option1" onClick="onCheck1()" checked> <label>Segmentación en Sentencias <label><br>
-                    <input type="checkbox" id="check2" name="option2" onClick="onCheck2()" checked> Tokenización <br>
-                    <input type="checkbox" id="check3" name="option3" onClick="onCheck3()" checked> Etiquetado <br>
-                    <input type="checkbox" id="check4" name="option4" onClick="onCheck4()" checked> Extracción de Entidades <br>
-                    <input type="checkbox" id="check5" name="option5" onClick="onCheck5()" checked> Desambiguación y Enlace -->
-                    </div>
-                  </td> 
-                </tr>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.blockUI.js') }}"></script>
+            <script type="text/javascript">
                 
-                </tbody></table>
-    </div>
-    
-     
-    <div id="resulUp"><div><table id="rstUp" style="margin: auto;"> <tbody><tr class="metadataTitle"> <td>Sentencias</td><td>Tokens</td><td>Entidades</td><td>Keywords Compuestas</td><td>Keywords Simples</td><td>Enlazados</td></tr><tr class="metadataCont"><td>1</td><td>4</td><td>2</td><td>0</td><td>0</td><td>2</td></tr></tbody></table></div></div>  
-    <div id="resultado"><div class="contenido"><div id="contenido_pestanas" style="margin: auto;"><span class="menu"><ul><li><a onclick="present(this,'#opcion1')" href="#" title="Opción 1" class="aqui">Sentencias»</a></li><li><a onclick="present(this,'#opcion2')" href="#" title="Opción 2" class="">Tokens»</a></li><li><a onclick="present(this,'#opcion3')" href="#" title="Opción 3" class="">Etiquetas PartofSpeech)</a></li><li><a onclick="present(this,'#opcion4')" href="#" title="Opción 4" class="">Extración</a></li><li><a onclick="present(this,'#opcion5')" href="#" title="Opción 5" class="">Enlace</a></li></ul></span><div id="opcion5" style="position: absolute; display: none;"><h3>Enlace</h3><h4>Entidades</h4><table><tbody><tr> <td>1 </td><td>Loja</td><td><a href="http://dbpedia.org/resource/Loja,_Ecuador">DBpedia</a> </td></tr><tr> <td>2 </td><td>Ecuador</td><td><a href="http://dbpedia.org/resource/Ecuador">DBpedia</a> </td></tr></tbody></table></div><div id="opcion4" style="position: absolute; display: none;"><h3>Extracionde Entidades y Keywords</h3><h4>Entidades</h4><table><tbody><tr> <td>1 </td><td>Loja</td></tr><tr> <td>2 </td><td>Ecuador</td></tr></tbody></table><h4>Keywords Compuestas</h4><table></table><h4>Keywords Simples</h4><table></table></div><div id="opcion3" style="position: absolute; display: none;"><h3>Etiquetas (PartofSpeech)</h3><table><tbody><tr> <td>1 </td><td>Loja,NP</td></tr><tr> <td>2 </td><td>is,VBZ</td></tr><tr> <td>3 </td><td>in,IN</td></tr><tr> <td>4 </td><td>Ecuador,NP</td></tr></tbody></table></div><div id="opcion2" style="position: absolute; display: none;"><h3>Palabras</h3><table><tbody><tr> <td>1 </td><td>Loja</td></tr><tr> <td>2 </td><td>is</td></tr><tr> <td>3 </td><td>in</td></tr><tr> <td>4 </td><td>Ecuador</td></tr></tbody></table></div><div id="opcion1" style="position: absolute;" class="center"><h3>Sentencias</h3><table><tbody><tr> <td>1 </td><td>Loja is in Ecuador</td></tr></tbody></table></div><p></p></div></div><p><a href="#" id="verJson">Ver Json</a></p></div>    
-    <div id="json">  </div>    
-    
+            $(document).ready(function() { 
+    $('#demo2').click(function() { 
+        $.blockUI({ css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+        } }); 
+ 
+        setTimeout($.unblockUI, 2000); 
+    }); 
+});
+         
+            </script>
 
-    <!--
 
-    <div id="light">      
-       <ul>
-        <li><a class="medium button red">Pink Button</a>
-        <a class="large button green">Green Button</a></li>
-       <li> <a class="large button blue">Blue Button</a>
-        <a class="large button red">Red Button</a></li>
-        <li><a class="large button orange">Orange Button</a>
-        <a class="large button yellow">Yellow Button</a></li>
-        </ul>
- </div>       
-        
- <div id="dark">       
-        <ul>
-        <li><a class="super button pink">Pink Button</a>
-        <a class="large button green">Green Button</a></li>
-       <li> <a class="medium button blue">Blue Button</a>
-        <a class="large button red">Red Button</a></li>
-       <li> <a class="small button orange">Orange Button</a>
-        <a class="medium button yellow">Yellow Button</a></li>
-        </ul>
-</div>  
-     -->
-    
+            <style type="text/css">
+            .spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+}
 
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+</style>>
+            
+
+        </head>
+        <body>
+            <div>
+                <div data-theme="a" data-role="header">
+                    <h3>
+                        First Page
+                    </h3>
+                    <a href="#second" id= "demo2" class="ui-btn-right">Next</a>
+                </div>
+                
+                <div data-role="content">
+                    
+                </div>
+                
+                <div data-theme="a" data-role="footer" data-position="fixed">
+                    
+                </div>
+            </div> 
+
+
+            <div class="spinner">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
 </div>
-
-
-    </section>
- 
-    <footer>
-    </footer>
- 
-    <aside>
-      <!--Contenido relacionado con la página o el sitio web-->
-    </aside>
-  
-</body></html>
+        </body>
+    </html>   

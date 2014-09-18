@@ -9,12 +9,29 @@ class Desambiguacion():
 		
 	def LeskAlgoritm(self, listData, listSentence):
 		#listData = [{"label":"", "frequency":"","dbpediaResource":"","DBpedRList":[{"uri":"", "abstract":""}], "type":0}]
+		#print "####################################################"
+		#print  listData
+		#print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+		#print listSentence
+		#print "####################################################"
 		for word_i in listData:
 			if len(word_i['DBpedRList']) == 1 :
 				word_i['dbpediaResource'] = word_i['DBpedRList'][0]['uri']
-				#print word_i['dbpediaResource']
 				continue
 			#print "\n	",word_i['label'], "..."
+			ltxt = word_i['label']
+			ltxt = ltxt.capitalize()
+			ltxt.replace(' ','_')
+			for dbr in word_i['DBpedRList']:
+				if dbr["uri"][len("http://dbpedia.org/resource/"):] == ltxt:
+					print ltxt
+					word_i['dbpediaResource'] = dbr["uri"]
+				
+			if word_i['dbpediaResource'] != "":
+				continue
+			if word_i['DBpedRList'] == []:
+				continue
+
 			BEST_SCORE = 0
 			BEST_SENSE = ""
 			BEST_ABSTR = ""
@@ -25,6 +42,10 @@ class Desambiguacion():
 					if word_i['label'] != word_k['label']:
 						for sense_l in word_k['DBpedRList']:
 							SCORE = SCORE + self.CalcularConcordancia(sense_j['abstract'], sense_l['abstract'], listSentence)
+					if len(listData) == 1:
+						for sense_l in word_k['DBpedRList']:
+							SCORE = SCORE + self.CalcularConcordancia(sense_j['abstract'], sense_l['abstract'], listSentence)
+
 				if SCORE > BEST_SCORE:
 					BEST_SCORE = SCORE
 					BEST_SENSE = sense_j['uri']
@@ -33,5 +54,5 @@ class Desambiguacion():
 				word_i['dbpediaResource'] = BEST_SENSE
 				print "SCORE", BEST_SCORE, ", ", BEST_SENSE
 			else:
-				print word_i,": ambiguo"
+				print BEST_SCORE," - ", word_i['label'],": ambiguo"
 		return listData
