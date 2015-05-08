@@ -2,17 +2,557 @@
 <html lang="en"><!--Se define el lenguaje de la página como español-->
   <head>
     
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/component.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loading.css') }}" />
+
+    <style type="text/css">
+      .controls{
+    text-align: right;
+    margin-top: -2px;
+    font-family: 'Lato', Arial, sans-serif;
+}
+
+.tableA{
+    margin: auto;
+    width: 85%;
+    background-color: #fff;
+    
+}
+.center {
+    
+    width: 70%;
+    background-color: #000;
+}
+
+
+.checks{
+  vertical-align: top;
+
+}
+
+#rstUp  td{
+  text-align: center;
+  border: 1px solid #999;
+    margin: auto;
+    width: 120  %;
+    background-color: #fff;
+}
+
+.colNum1{
+  text-align: right;
+  padding-right: 10px; 
+  border-left: 1px solid #2F426A;
+  border-right: 1px solid #2F426A;
+  border-bottom: 1px solid #2F426A;
+  border-top: 1px solid #2F426A;
+  width: 20px;
+  color: #222;
+    /*background-color: #2F426A;*/
+
+}
+.colData1{
+  text-align: left;
+  padding-left: 10px; 
+  border-left: 1px solid #2F426A;
+  border-right: 1px solid #2F426A;
+  border-bottom: 1px solid #2F426A;
+  border-top: 1px solid #2F426A;
+  width: 700px;
+    color: #222;
+    /*background-color: #2F426A;*/
+}
+
+.colNum2{
+  text-align: right;
+  padding-right: 10px;
+  border-left: 1px solid  #dd5244 ;
+  border-right: 1px solid  #dd5244  ;
+  border-bottom: 1px solid  #dd5244 ;
+  border-top: 1px solid  #dd5244  ;
+  width: 20px ;
+    color: #222;
+    /*background-color: #dd5244;*/
+}
+.colData2{
+  text-align: left;
+  padding-left: 10px; 
+  border-left: 1px solid  #dd5244 ;
+  border-right: 1px solid  #dd5244  ;
+  border-bottom: 1px solid  #dd5244 ;
+  border-top: 1px solid  #dd5244  ;
+  width: 700px;
+    color: #222;
+    /*background-color: #dd5244;*/
+}
+
+
+
+
+
+
+.demo h1                        {   margin-bottom: 50px;}
+a.boton_demo                    {   position: absolute; top: 580px; left: 70px; }
+#contenido_pestanas             {   margin-left: 70px;}
+#contenido_pestanas h3          {   margin-bottom: 10px;}
+#contenido_pestanas h3,
+#contenido_pestanas p           {   margin-left: 0px !important; clear: both;}
+#contenido_pestanas span.menu ul          {   display: block; height: 18px;}
+
+#contenido_pestanas div         {   width: 600px; background: #fff; padding: 26px;}
+
+
+
+
+.demo .contenido ul {
+    list-style-position: inside;
+    list-style-type: none !important;
+    margin-left: 0 !important;
+}
+.back {
+    margin: auto;
+    width: 70%;
+    background-color: #fff;
+    font-style: normal;
+    font-size: 13px;
+    font-family: "Times New Roman", Times, serif;
+}
+nav a {
+    margin: auto;
+    font-style: normal;   
+}
+
+h1 {
+  display: block; text-decoration: none;
+  font: 30px Helvetica, Arial, Sans-Serif;  
+  
+  color: #999; text-shadow: 0px 3px 8px #2a2a2a;
+ }
+  h1:hover {
+    color: #a0a0a0; text-shadow: 0px 5px 8px #2a2a2a;
+  }
+ 
+h2 {
+    font-family: "futura-pt", helvetica, sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #f8f8f8;
+  font-size: 2.0em;
+  margin: 15px;
+  
+  
+  color: #222; text-shadow: 0px 1px 1px #ccc;
+}
+h4 {
+    font-family: "futura-pt", helvetica, sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #000;
+  font-size: 1.3em;
+  margin: 15px;
+  
+  
+  color: #222; text-shadow: 0px 1px 1px #ccc;
+}
+input[type=checkbox] {display:none;}
+  
+span.mcheck {
+background-color:#fff;
+
+
+font-family: 'Lato', Arial, sans-serif;
+font-size:.8em;
+text-decoration:none;
+padding-left: 40px; 
+width:180px;
+height:26px;
+line-height:30px;
+cursor:pointer;
+display:block;
+margin: 0 auto;
+-webkit-transition:background-color 150ms ease-in;
+-moz-transition:background-color 150ms ease-in;
+-ms-transition:background-color 150ms ease-in;
+-o-transition:background-color 150ms ease-in;
+transition:background-color 150ms ease-in;
+
+color:#fff;
+text-decoration:none;
+text-shadow: 0 0 1px rgba(255,255,255,0.3);
+background:#dd5244 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAS5JREFUeNq8110OgjAMAGBGvIY3VESjt9jPg95PT+LccBIZ7dYOWJPGB+g+Ymg3hLW2QeLkcu/y2pSFdvl0eQevehjI3uXbfkMh96TShFq/xhG6J4faAtxEtSBOQTm4QWpnOBWl4CZT69fuYpiCpnBDrB1xLhrjgoFO8F1oGcFslUv4bV32zFoxmOHJta0XMn65dC0UaiddA8UGiN4axeC1cUkdmWviEls/NwL1FqjPNtNvoimPdC3yRCUTiTXbt0R/oSnw2iiK10BBvBY6w2uiE3xJr8oFtcrvxy/fVcyeVdGx98yotcOxN/znHeMUIhdMOG8c4reagssF43VEoT5O4ZJwvNUUFJtcEE5BMXyGpnanf5yDxjiI+hSJj7YunEBvhbuTCh9tD+jiR4ABAJ0SrJgNr1UAAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:12px 11px;
+
+}
+
+span.mcheck:hover {
+color:rgba(255,255,255,0.5);
+background-color:#8298F0;
+background:#5C7AF6 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNpi+P//PwMNsS4QbwBiLnQ5WlqqAsRP/0PARiBmoYfFkkB8+z8qWALEjLS0mB+IL/3HDibSymJQXB7/jx/UgNSCvU4lwAbEG4DYkwi1WUxUspQZiOcRaSkIWOAKMk0Sg3jaf+IBOIVjMyQWiH8DsR+RljaTYOkBWJ5GNwRk2R+ooh9A7ETA0jwSLL0ATfEYqRpkyVc0xR+A2AyHpdFA/I9IS0F5WhRbAWIEtQQbeAXE6lhC5jeRlj4GYgVsRaYK1HBCmmWgmuyxhAwu8BpaXjNgs/gYkYbcAGIXPCGDDkCOM8eVPkCEFhE+JhX8BGJnfAkTxgC57BOVLAXlihBC2RA9Vf+k0FJQKk8nJv+jCwQi5WNyQAWxpR02wRQS8icy6CKlmMUlUUGipfOQK3lKLAbhdhIKfWZS6258kiAfzCZg6V4gZiOn0UBIAcgn63BYehK50Ke2xQxQH+3FUoqJUtJMIlYhLxAfxVJu09xiWENuMxCrUaNhCBBgAOAVfjALa5TLAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:12px 11px;
+}
+
+input[type=checkbox]:checked + span.mcheck {
+text-decoration:none;
+background:#2F426A url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNpi+P//PwMNsS4QbwBiLnQ5WlqqAsRP/0PARiBmoYfFkkB8+z8qWALEjLS0mB+IL/3HDibSymJQXB7/jx/UgNSCvU4lwAbEG4DYkwi1WUxUspQZiOcRaSkIWOAKMk0Sg3jaf+IBOIVjMyQWiH8DsR+RljaTYOkBWJ5GNwRk2R+ooh9A7ETA0jwSLL0ATfEYqRpkyVc0xR+A2AyHpdFA/I9IS0F5WhRbAWIEtQQbeAXE6lhC5jeRlj4GYgVsRaYK1HBCmmWgmuyxhAwu8BpaXjNgs/gYkYbcAGIXPCGDDkCOM8eVPkCEFhE+JhX8BGJnfAkTxgC57BOVLAXlihBC2RA9Vf+k0FJQKk8nJv+jCwQi5WNyQAWxpR02wRQS8icy6CKlmMUlUUGipfOQK3lKLAbhdhIKfWZS6258kiAfzCZg6V4gZiOn0UBIAcgn63BYehK50Ke2xQxQH+3FUoqJUtJMIlYhLxAfxVJu09xiWENuMxCrUaNhCBBgAOAVfjALa5TLAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:12px 11px;
+}
+
+
+
+input[type=checkbox]:checked:hover + span.mcheck {
+background-color:#dd5244;
+color:rgba(255,255,255,0.5);
+text-decoration:none;
+  background:#dd5244 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAS5JREFUeNq8110OgjAMAGBGvIY3VESjt9jPg95PT+LccBIZ7dYOWJPGB+g+Ymg3hLW2QeLkcu/y2pSFdvl0eQevehjI3uXbfkMh96TShFq/xhG6J4faAtxEtSBOQTm4QWpnOBWl4CZT69fuYpiCpnBDrB1xLhrjgoFO8F1oGcFslUv4bV32zFoxmOHJta0XMn65dC0UaiddA8UGiN4axeC1cUkdmWviEls/NwL1FqjPNtNvoimPdC3yRCUTiTXbt0R/oSnw2iiK10BBvBY6w2uiE3xJr8oFtcrvxy/fVcyeVdGx98yotcOxN/znHeMUIhdMOG8c4reagssF43VEoT5O4ZJwvNUUFJtcEE5BMXyGpnanf5yDxjiI+hSJj7YunEBvhbuTCh9tD+jiR4ABAJ0SrJgNr1UAAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:12px 11px;
+}
+
+#textMain, #tjson {  
+    padding: 5px;  
+    font-size: 12px;  
+    text-shadow: 0px 1px 0px #fff;  
+    outline: none;  
+    -webkit-border-radius: 3px;  
+    -moz-border-radius: 3px;  
+    border-radius: 3px;  
+    border: 1px solid #ccc;  
+    -webkit-transition: .3s ease-in-out;  
+    -moz-transition: .3s ease-in-out;  
+    resize: none;
+}  
+  
+    #textMain:focus, #tjson:focus {  
+    border: 1px solid #fafafa;  
+    -webkit-box-shadow: 0px 0px 6px #222;  
+    -moz-box-shadow: 0px 0px 5px #222;  
+    box-shadow: 0px 0px 5px #222;  
+} 
+
+#dark{
+  background-color:#333;
+  border:1px solid #000;
+  padding:10px;
+  margin-top:20px;
+} 
+
+#contenido_pestanas, #resulUp{
+  padding:5px;
+  margin-top:20px;
+  width: 80%;
+  margin: 0 auto;
+} 
+
+.button, .button:visited {
+  background: #222 ; 
+  display: inline-block; 
+  padding: 5px 10px 6px; 
+  color: #fff; 
+  text-decoration: none;
+  
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  position: relative;
+  cursor: pointer
+}
+ 
+  .button:hover             { background-color: #111; color: #fff; }
+  .button:active              { top: 1px; }
+  
+  .button, .button:visited,
+  .medium.button, .medium.button:visited    { font-size: 13px; 
+                          line-height: 1; 
+                          }
+                          
+  .go.button, .go.button:visited        { background-color: #333; }
+  .go.button:hover              { background-color: #2F426A; }
+  .reset.button, .reset.button:visited      { background-color: #333; }
+  .reset.button:hover             { background-color: #dd5244; }
+
+
+
+  .cl-effect-15 a {
+    color: rgba(0,0,0,0.2);
+    font-weight: 700;
+    text-shadow: none;
+}
+ 
+.cl-effect-15 a::before {
+    color: #fff;
+    content: attr(data-hover);
+    position: absolute;
+    transition: transform 0.3s, opacity 0.3s;
+}
+ 
+.cl-effect-15 a:hover::before,
+.cl-effect-15 a:focus::before {
+    transform: scale(0.9);
+    opacity: 0;
+}
+
+
+.color-1 {
+  background: #2F426A;
+}
+
+
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+
+nav a.aqui      {   text-shadow: 1px 1px 3px rgba(0,0,0,1);}
+
+.headMenu {
+  position: relative;
+  display: inline-block;
+  outline: none;
+  color: #222;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .8em;
+}
+
+.headMenu:hover {
+
+  color: #888;
+
+}
+
+.subtRest {
+  position: relative;
+  display: inline-block;
+  outline: none;
+  color: #222;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .85em;
+} 
+
+
+nav.cl-effect-1 a {
+  position: relative;
+  display: inline-block;
+  margin: 8px 8px;
+  outline: none;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  text-shadow: 0 0 1px rgba(255,255,255,0.3);
+  font-size: .8em;
+}
+
+nav.cl-effect-1 a:hover,
+nav.cl-effect-1 a:focus {
+  outline: none;
+}
+
+/* Effect 1: Brackets */
+.cl-effect-1 a::before,
+.cl-effect-1 a::after {
+  display: inline-block;
+  opacity: 0;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+  -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+  transition: transform 0.3s, opacity 0.2s;
+}
+
+.cl-effect-1 a::before {
+  margin-right: 10px;
+  content: '[';
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+.cl-effect-1 a::after {
+  margin-left: 10px;
+  content: ']';
+  -webkit-transform: translateX(-20px);
+  -moz-transform: translateX(-20px);
+  transform: translateX(-20px);
+}
+
+.cl-effect-1 a:hover::before,
+.cl-effect-1 a:hover::after,
+.cl-effect-1 a:focus::before,
+.cl-effect-1 a:focus::after {
+  opacity: 1;
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  transform: translateX(0px);
+}
+
+
+/*.spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+*/
+
+.spinner {
+  margin: 100px auto;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.container1 > div, .container2 > div, .container3 > div {
+  width: 6px;
+  height: 6px;
+  background-color: #333;
+
+  border-radius: 100%;
+  position: absolute;
+  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+  animation: bouncedelay 1.2s infinite ease-in-out;
+  
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .spinner-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.container2 {
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+.container3 {
+  -webkit-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+
+.circle1 { top: 0; left: 0; }
+.circle2 { top: 0; right: 0; }
+.circle3 { right: 0; bottom: 0; }
+.circle4 { left: 0; bottom: 0; }
+
+.container2 .circle1 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.container3 .circle1 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.container1 .circle2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.container2 .circle2 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+.container3 .circle2 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+.container1 .circle3 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+
+.container2 .circle3 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+.container3 .circle3 {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+
+.container1 .circle4 {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.container2 .circle4 {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+
+.container3 .circle4 {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+*/
+
+
+    </style>
     
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/struct.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/checks.js') }}"></script>
     
     <script type="text/javascript">
     $(document).ready(function(){ // Script del Navegador
@@ -26,6 +566,604 @@
       $(t).fadeIn(100);
        return false;
     }
+
+
+  $(function() {
+    $('a#reset').bind('click', function() {
+        function ColocarHtml(rst, rstUp){
+
+            //rst += "<p><a href=# id=verJson>Ver Json</a>";
+            document.getElementById("resultado").innerHTML = rst;
+            document.getElementById("resulUp").innerHTML = rstUp;
+        }
+        
+                document.getElementById("textMain").value = "";
+                var rst = ""
+                var rstUp = ""
+                ColocarHtml(rst, rstUp)
+                });
+    
+    $('a#calculate').bind('click', function() { 
+        //document.getElementById('reset').href = 'utpl';
+        //document.getElementById('reset').style.visibility  = 'hidden';
+        //$("#reset").on('click');
+        //$('reset').attr("disabled", "true");
+        var botonReset = document.getElementById("reset");
+          //.reset {    : none;   cursor: default;  }
+        botonReset.style.pointerEvents = "none";
+        botonReset.style.opacity = 0.5;
+        check1 = document.getElementById("check1");
+        check2 = document.getElementById("check2");
+        check3 = document.getElementById("check3");
+        check4 = document.getElementById("check4");
+        check5 = document.getElementById("check5");    
+        
+        function ColocarHtml(rst, rstUp){
+
+            //rst += "<p><a href=# id=verJson>Ver Json</a>";
+            document.getElementById("resultado").innerHTML = rst;
+            document.getElementById("resulUp").innerHTML = rstUp;
+        }
+
+        function Sentencias(data) {
+            rst = "<div id=\"opcion1\" style=\"position: absolute;\" class=\"center\">"
+            //rst += "<h3>Sentencias</h3>"
+                    rst += "<table>"
+                    rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Sentencias </td></tr>"
+                    for (var i = 1; i <= data.result['TokensSentencias'].length; i++) 
+                    {
+                        rst += "<tr class=\"bodyRest\"> <td class=\"colNum1\">" + i +"</td><td class=\"colData1\">"+  data.result['TokensSentencias'][i-1] + "</td></tr>"    
+                    }
+            rst += "</table>"
+            rst += "</div>"
+            return rst;
+        }
+
+        function wordTokens(data) {
+            rst = "<div id=\"opcion2\" style=\"position: absolute; display: none;\">"
+            
+                    cont = 0
+                    for (var i = 0; i < data.result['TokensPalabras'].length; i++) 
+                    {
+                        rst += "<p class=\"subtRest\">Sentencia #"+(i+1)+"</p>"
+                        rst += "<table>"
+                        rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td></tr>"
+                        for (var j = 0; j < data.result['TokensPalabras'][i].length; ) 
+                        { 
+                        rst += "<tr>"
+                            t = 0
+
+                            while (j < data.result['TokensPalabras'][i].length &&  t != 3 )
+                            {
+                                t ++;
+                                cont ++;
+                                rst += "<td class=\"colNum1\">" + cont +" </td><td class=\"colData1\">"+  data.result['TokensPalabras'][i][j] + "</td>";
+                                j ++;
+                                if(j < data.result['TokensPalabras'][i].length)
+                                {
+                                    rst += "<td></td>"
+                                }
+                            }
+                            rst += "</tr>"
+
+                        }
+                        rst += "</table>" 
+                    }
+                    
+            rst += "</div>"
+            return rst;              // the function returns the product of p1 and p2
+        }
+
+        function Etiquetado(data) {
+            rst = "<div id=\"opcion3\" style=\"position: absolute; display: none;\">"
+            
+                    cont = 0
+                    for (var i = 0; i < data.result['EtiquetadoPalabras'].length; i++) 
+                    {
+                        rst += "<p class=\"subtRest\">Sentencia #"+(i+1)+"</p>"
+                        rst += "<table>"
+                         rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Token </td><td class=\"colData2\"> Etiqueta </td></tr>"
+                        for (var j = 0; j < data.result['EtiquetadoPalabras'][i].length;) 
+                        { 
+                        rst += "<tr>"
+                            t = 0
+
+                            while (j < data.result['EtiquetadoPalabras'][i].length &&  t != 3 )
+                            {
+                                t ++;
+                                cont ++;  
+                                rst += "<td class=\"colNum1\">" + cont +" </td><td class=\"colData1\">"+  data.result['EtiquetadoPalabras'][i][j][0] + "</td><td class=\"colData1\">"+  data.result['EtiquetadoPalabras'][i][j][1]+ "</td>";
+                                j ++;
+                                if(j < data.result['EtiquetadoPalabras'][i].length)
+                                {
+                                    rst += "<td></td>"
+                                }
+                            }
+                            rst += "</tr>"
+                        }
+                        rst += "</table>"
+                    }
+            rst += "</div>"
+            return rst;              // the function returns the product of p1 and p2
+        }
+
+        function ExtracionEyK(data) {
+            rst = "<div id=\"opcion4\" style=\"position: absolute; display: none;\">"
+            rst += "<p class=\"subtRest\">Entidades</p>"
+            rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td></tr>"
+            
+            for (var i = 0; i < data.result['Entidades'].length;) 
+            {
+                rst += "<tr>"
+                t=0;
+                while (i < data.result['Entidades'].length &&  t != 3 )
+                {
+                    t ++;
+                    rst += "<td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['Entidades'][i] + "</td>"
+                    i ++;
+                    if(i < data.result['Entidades'].length)
+                    {
+                        rst += "<td></td>"
+                    }
+                }
+                rst += "</tr>"
+            }
+            rst += "</table>"
+
+            rst += "<p class=\"subtRest\">Keywords Compuestas</p>"
+            rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Compuestas </td></tr>"
+            for (var i = 0; i < data.result['KeywordsCompuestas'].length; ) 
+            {
+
+                rst += "<tr>"
+                t=0;
+                while (i < data.result['KeywordsCompuestas'].length &&  t != 3 )
+                {
+                    t ++;
+                    rst += "<td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['KeywordsCompuestas'][i] + "</td>"
+                    i ++;
+                    if(i < data.result['KeywordsCompuestas'].length)
+                    {
+                        rst += "<td></td>"
+                    }
+                }
+                rst += "</tr>"
+                
+            }
+            rst += "</table>"
+
+
+            rst += "<p class=\"subtRest\">Keywords Simples</p>"
+            rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords Simples </td></tr>"
+            for (var i = 0; i < data.result['KeywordsSimples'].length; ) 
+            {
+
+                rst += "<tr>"
+                t=0;
+                while (i < data.result['KeywordsSimples'].length &&  t != 3 )
+                {
+                    t ++;
+                    rst += "<td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['KeywordsSimples'][i] + "</td>"
+                    i ++;
+                    if(i < data.result['KeywordsSimples'].length)
+                    {
+                        rst += "<td></td>"
+                    }
+                }
+                rst += "</tr>"
+                
+            }
+            rst += "</table>"
+            rst += "</div>"
+            return rst;              
+        }
+
+        function Enlace(data) {
+            rst = "<div id=\"opcion5\" style=\"position: absolute; display: none;\">"
+            rst += "<p class=\"subtRest\">Entidades</p>"
+            rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidad </td><td class=\"colData2\"> Tipo </td><td class=\"colData2\"> Enlace </td></tr>"
+            for (var i = 0; i < data.result['EntidadesDesambiguadas'].length; i++) 
+            {
+                rst += "<tr> <td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['EntidadesDesambiguadas'][i]['label'] +"</td>" ; 
+
+                if (data.result['EntidadesDesambiguadas'][i]['dbpediaResource'])
+                {
+                    rst += "<td  class=\"colData1\">"
+                    for ( var j = 0; j <  data.result['EntidadesDesambiguadas'][i]['dbpediaResourceType'].length; j++)
+                    {
+                        rst += "<a href = \""+data.result['EntidadesDesambiguadas'][i]['dbpediaResourceType'][j] + "\">"+ data.result['EntidadesDesambiguadas'][i]['dbpediaResourceType'][j] +"</a><br>"
+                    }
+                    rst += "</td>"
+                    rst += "<td class=\"colData1\">"+  "<a href=\""+data.result['EntidadesDesambiguadas'][i]['dbpediaResource'] +"\" >"+data.result['EntidadesDesambiguadas'][i]['dbpediaResource']+"</a> "+ "</td>";
+                }else{
+                    rst += "<td  class=\"colData1\"></td><td  class=\"colData1\"></td>"
+                }
+
+                rst += "</tr>";
+            }
+            rst += "</table>"
+
+            rst += "<p class=\"subtRest\">Keyword Compuestas</p>"
+            rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Keywords </td><td class=\"colData2\"> Tipo </td><td class=\"colData2\"> Enlace </td></tr>"
+            for (var i = 0; i < data.result['KeyWordsCompDesambiguadas'].length; i++) 
+            {
+                rst += "<tr> <td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['KeyWordsCompDesambiguadas'][i]['label'] +"</td>" ; 
+
+                if (data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResource'])
+                {
+                    rst += "<td  class=\"colData1\">"
+                    for ( var j = 0; j <  data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResourceType'].length; j++)
+                    {
+                        rst += "<a href = \""+data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResourceType'][j] + "\">"+ data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResourceType'][j] +"</a><br>"
+                    }
+                    rst += "</td>"
+                    rst += "<td class=\"colData1\">"+  "<a href=\""+data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResource'] +"\" >"+data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResource'] +"</a> "+ "</td>";
+                }else{
+                    rst += "<td  class=\"colData1\"></td><td  class=\"colData1\"></td>"
+                }
+
+                rst += "</tr>";
+            }
+            rst += "</table>"
+
+            rst += "<p class=\"subtRest\">Keywords Simples</p>"
+            rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Keyword </td><td class=\"colData2\"> Tipo </td><td class=\"colData2\"> Enlace </td></tr>"
+            for (var i = 0; i < data.result['KeyWordsSimpDesambiguadas'].length; i++) 
+            {
+                rst += "<tr> <td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['KeyWordsSimpDesambiguadas'][i]['label'] +"</td>" ; 
+
+                if (data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResource'])
+                {
+                    rst += "<td  class=\"colData1\">"
+                    for ( var j = 0; j <  data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResourceType'].length; j++)
+                    {
+                        rst += "<a href = \""+data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResourceType'][j] + "\">"+ data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResourceType'][j] +"</a><br>"
+                    }
+                    rst += "</td>"
+                    rst += "<td class=\"colData1\">"+  "<a href=\""+data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResource'] +"\" >"+data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResource'] +"</a> "+ "</td>";
+                }else{
+                    rst += "<td  class=\"colData1\"></td><td  class=\"colData1\"></td>"
+                }
+
+                rst += "</tr>";
+            }
+            rst += "</table>"
+            rst += "</div>"
+            return rst;              
+        }
+
+        function Metadata(data, funcion) {
+            var rstUp = "<div><table id = \"rstUp\"  style=\"margin: auto;\"> "
+            //rstUp += "<tr class=\"metadataTitle\"> <td>Sentencias</td><td>Tokens</td><td>Entidades</td><td>Keywords Compuestas</td><td>Keywords Simples</td><td>Enlaces</td><tr>"
+               if (funcion == 1)
+                {
+                    rstUp += "<tr class=\"metadataTitle\"> <td>Sentencias</td><tr>"
+                    rstUp += "<tr class=\"metadataCont\"><td>"+data.result['NumSentencias']+"</td></tr>"
+                } else if (funcion == 2)
+                {
+                    rstUp += "<tr class=\"metadataTitle\"> <td>Sentencias</td><td>Tokens</td><tr>"
+                    rstUp += "<tr class=\"metadataCont\"><td>"+data.result['NumSentencias']+"</td><td>"+data.result['NumTokensPalabras']+"</td></tr>"
+                    
+                } else if (funcion == 3)
+                {
+                    rstUp += "<tr class=\"metadataTitle\"> <td>Sentencias</td><td>Tokens</td><tr>"
+                    rstUp += "<tr class=\"metadataCont\"><td>"+data.result['NumSentencias']+"</td><td>"+data.result['NumTokensPalabras']+"</td></tr>"
+                   
+                } else if (funcion == 4)
+                {
+                    rstUp += "<tr class=\"metadataTitle\"> <td>Sentencias</td><td>Tokens</td><td>Entidades</td><td>Keywords Compuestas</td><td>Keywords Simples</td></tr>"
+                    rstUp += "<tr class=\"metadataCont\"><td>"+data.result['NumSentencias']+"</td><td>"+data.result['NumTokensPalabras']+"</td><td>"+data.result['NumEntidades']+"</td><td>"+data.result['NumKeywordsCompuestas']+"</td><td>"+data.result['NumKeywordsSimples']+"</td></tr>"
+                
+                } else if (funcion == 5)
+                {
+                    rstUp += "<tr class=\"metadataTitle\"> <td>Sentencias</td><td>Tokens</td><td>Entidades</td><td>Keywords Compuestas</td><td>Keywords Simples</td><td>Enlazados</td></tr>"
+                    rstUp += "<tr class=\"metadataCont\"><td>"+data.result['NumSentencias']+"</td><td>"+data.result['NumTokensPalabras']+"</td><td>"+data.result['NumEntidades']+"</td><td>"+data.result['NumKeywordsCompuestas']+"</td><td>"+data.result['NumKeywordsSimples']+"</td><td>"+data.result['NumEntidadesDesambiguadas']+"</td></tr>"
+                    
+                }
+                rstUp += "</table>"
+                return rstUp
+        }
+
+        function HeadMenu(funcion) {
+            var rstUp = "<span class=\"menu\"><ul>"
+
+               if (funcion == 1)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a></li>"
+                } else if (funcion == 2)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens</a></li>"
+                    
+                } else if (funcion == 3)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas (Part of Speech)</a></li>"
+                   
+                } else if (funcion == 4)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas (Part of Speech)</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion4')\" href=\"#\" title=\"Opción 4\" class=\"\">Extración</a></li>"
+                
+                } else if (funcion == 5)
+                {
+                    rstUp += "<li><a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas (Part of Speech)</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion4')\" href=\"#\" title=\"Opción 4\" class=\"\">Extración</a></li>"
+                    rstUp += "<li><a onclick=\"present(this,'#opcion5')\" href=\"#\" title=\"Opción 5\" class=\"\">Enlace</a></li>"
+                    
+                }
+                rstUp += "<li><a id= \"verJson\" onclick=\"present(this,'#json')\" href=\"#\" title=\"Opción 6\" class=\"\">Json</a></li>"
+                rstUp += "</ul></span>"
+                return rstUp
+        }
+
+        function HeadMenu2(funcion) {
+
+
+            var rstUp = "<section class=\"color-1\">"
+            rstUp += "<nav class=\"cl-effect-1\">"
+                
+
+               if (funcion == 1)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a>"
+                    
+                } else if (funcion == 2)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens</a>"
+                    
+                    
+                } else if (funcion == 3)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas (Part of Speech)</a>"
+                    
+                   
+                } else if (funcion == 4)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas (Part of Speech)</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion4')\" href=\"#\" title=\"Opción 4\" class=\"\">Extración</a>"
+                
+                } else if (funcion == 5)
+                {
+                    rstUp += "<a onclick=\"present(this,'#opcion1')\" href=\"#\" title=\"Opción 1\" class=\"aqui\">Sentencias</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion2')\" href=\"#\" title=\"Opción 2\" class=\"\">Tokens</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion3')\" href=\"#\" title=\"Opción 3\" class=\"\">Etiquetas (Part of Speech)</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion4')\" href=\"#\" title=\"Opción 4\" class=\"\">Extración</a>"
+                    rstUp += "<a onclick=\"present(this,'#opcion5')\" href=\"#\" title=\"Opción 5\" class=\"\">Enlace</a>"
+                    
+                }
+                rstUp += "<a id= \"verJson\" onclick=\"present(this,'#json')\" href=\"#\" title=\"Opción 6\" class=\"\">Json</a>"
+                
+
+                rstUp += "</nav></section>"
+                return rstUp
+        }
+
+
+        function llamaServicio(servicio, funcion){
+            $.getJSON($SCRIPT_ROOT + servicio, {
+            text: $('textarea#textMain').val()
+            }, function(data) {
+                if ('err' in data.result){
+                    alert(data.result['err'])    
+                     var rst = "<div class = \"contenido\" >error: "+data.result['err']+" </div>";
+                     var rstUp = ""
+                }else{
+                    var rst = "<div class = \"contenido\" >";
+                    rst += "<div id = \"contenido_pestanas\" style=\"margin: auto;\">";
+                    rst += HeadMenu2(funcion);
+                    var rstUp = ""
+                    if (funcion == 1)
+                    {
+                        rst+= Sentencias(data);
+                    } else if (funcion == 2)
+                    {
+                        rst += wordTokens(data);
+                        rst += Sentencias(data);
+                    } else if (funcion == 3)
+                    {
+                        rst += Etiquetado(data);
+                        rst += wordTokens(data);
+                        rst += Sentencias(data);
+                    } else if (funcion == 4)
+                    {
+                        rst += ExtracionEyK(data);
+                        rst += Etiquetado(data);
+                        rst += wordTokens(data);
+                        rst += Sentencias(data);
+                    } else if (funcion == 5)
+                    {                    
+                        rst += Enlace(data);
+                        rst += ExtracionEyK(data);
+                        rst += Etiquetado(data);
+                        rst += wordTokens(data);
+                        rst += Sentencias(data);
+                    }
+                    rstUp = Metadata(data, funcion)
+                    
+                    rst += "<div id=\"json\" style=\"position: absolute; display: none;\"> <textarea id=\"tjson\" rows=\"11\" cols=\"85\"  readonly> </textarea> </div>  ";
+                    rst += "</div>"
+                    rst += "</div>"
+                }
+                    ColocarHtml(rst,rstUp);
+                    botonReset.style.pointerEvents = "visible";
+                    botonReset.style.opacity = 1;
+                $('a#verJson').bind('click', function() {
+                document.getElementById("tjson").innerHTML = JSON.stringify(data);
+                });
+                
+            });
+        }
+        
+        -->        
+        var rst = "<div class=\"spinner\"> "+
+              "<div class=\"spinner-container container1\"> " +
+                "<div class=\"circle1\"></div> " +
+                "<div class=\"circle2\"></div> " +
+                "<div class=\"circle3\"></div> " +
+                "<div class=\"circle4\"></div> " +
+              "</div> " +
+              "<div class=\"spinner-container container2\"> " +
+                "<div class=\"circle1\"></div> " +
+                "<div class=\"circle2\"></div> " +
+                "<div class=\"circle3\"></div> " +
+                "<div class=\"circle4\"></div> " +
+              "</div> " +
+              "<div class=\"spinner-container container3\"> " +
+                "<div class=\"circle1\"></div> " +
+                "<div class=\"circle2\"></div> " +
+                "<div class=\"circle3\"></div> " +
+                "<div class=\"circle4\"></div> " +
+              "</div> " +            "</div>" 
+
+        var rstUp = "<div class=\"spinner\">  <div class=\"bounce1\"></div>  <div class=\"bounce2\"></div>  <div class=\"bounce3\"></div> </div>"
+        rstUp = ""
+        ColocarHtml(rst, rstUp)
+
+        if(check5.checked)
+        {
+            llamaServicio('/v1/Desambiguacion',5)
+        } else if(check4.checked)
+        {
+            llamaServicio('/v1/ExtracionEntidades',4)
+        } else if (check3.checked) 
+        {
+            llamaServicio('/v1/Etiquetado',3)
+        } else  if (check2.checked) 
+        {
+            llamaServicio('/v1/TokensPalabra',2)
+        }  else if (check1.checked)
+        {
+            llamaServicio('/v1/TokensSentencias',1)
+        } else {
+          alert("No service Selected")
+          rstUp = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          rstUp = ""
+          ColocarHtml(rst, rstUp)
+
+        }
+      //document.getElementById('reset').style.visibility  = 'visible';
+      //$("#reset").on('click');
+      
+      return false;
+    });
+  });
+
+
+function onCheck1() {
+    check1 = document.getElementById("check1")
+    check2 = document.getElementById("check2")
+    check3 = document.getElementById("check3")
+    check4 = document.getElementById("check4")
+    check5 = document.getElementById("check5")
+    if (check1.checked) {
+        check1.checked = true;
+        check2.checked = false;
+        check3.checked = false;
+        check4.checked = false;
+        check5.checked = false;
+    }
+    else{
+        check1.checked = true;
+        check2.checked = false;
+        check3.checked = false;
+        check4.checked = false;
+        check5.checked = false;
+    }
+  }
+  function onCheck2() {
+    check1 = document.getElementById("check1")
+    check2 = document.getElementById("check2")
+    check3 = document.getElementById("check3")
+    check4 = document.getElementById("check4")
+    check5 = document.getElementById("check5")
+
+    if (check2.checked) {
+        check1.checked = true;
+        check3.checked = false;
+        check4.checked = false;
+        check5.checked = false;
+    }
+    else{
+        check1.checked = true;
+        check3.checked = false;
+        check4.checked = false;
+        check5.checked = false;
+    }
+}
+    
+function onCheck3() {
+    check1 = document.getElementById("check1")
+    check2 = document.getElementById("check2")
+    check3 = document.getElementById("check3")
+    check4 = document.getElementById("check4")
+    check5 = document.getElementById("check5")
+    if (check3.checked) {
+
+        check1.checked = true;
+        check2.checked = true;
+        check4.checked = false;
+        check5.checked = false;
+    }
+    else{
+        check1.checked = true;
+        check2.checked = true;
+        check4.checked = false;
+        check5.checked = false;
+    }
+}
+   
+function onCheck4() {
+    check1 = document.getElementById("check1")
+    check2 = document.getElementById("check2")
+    check3 = document.getElementById("check3")
+    check4 = document.getElementById("check4")
+    check5 = document.getElementById("check5")
+    if (check4.checked) {
+        check1.checked = true;
+        check2.checked = true;
+        check3.checked = true;
+        check5.checked = false;
+    }
+    else{
+        check1.checked = true;
+        check2.checked = true;
+        check3.checked = true;
+        check5.checked = false;
+    }
+}
+   
+function onCheck5() {
+    check1 = document.getElementById("check1")
+    check2 = document.getElementById("check2")
+    check3 = document.getElementById("check3")
+    check4 = document.getElementById("check4")
+    check5 = document.getElementById("check5")
+    if (check5.checked) {
+        check1.checked = true;
+        check2.checked = true;
+        check3.checked = true;
+        check4.checked = true;
+    }
+}
+
+
     </script>
     <meta charset="utf-8"/><!--La codificacion del documento es UTF-8-->
     <title>Procesamiento de Texto - WS integrador</title><!--Se recomienda un titulo diferente para cada página del sitio web-->
@@ -41,7 +1179,8 @@
       <hr>
       </nav>
       <hgroup>
-        <h2>Frontal WS</h2>
+        <h2>Enlace y Enriquecimiento en Datos Enlazados</h2>
+        <h4>Piloto: dominio de datos Universitarios</h4>
       </hgroup>
     </header>
  
@@ -53,7 +1192,7 @@
         <table>
                 <tr>
                   <td>
-                      <textarea id = "textMain" placeholder="Texto a ser procesado.."  name=text rows="8" cols="70">ISIS beheaded another Westerner, a British aid worker. Britain's leader vowed the death won't stop his country from battling the terrorist group. And U.S. Secretary of State John Kerry courted Middle Eastern leaders to join a coalition in the fight.</textarea> 
+                      <textarea id = "textMain" placeholder="Texto a ser procesado.."  name=text rows="8" cols="70">Through the application of semantic technologies to describe Open Educational Resources, any agent (human or software-based) could process and understand its contents; therefore, the agent could perform tasks autonomously or in a more effective way. In this paper, we describe the design and validation of the OER-CC ontology, which models the domain knowledge of educational resources licensed under Creative Commons Licenses. One of the most important contributions of this work is that we implement different rules and axioms to identify inconsistencies between rights provided by a licensed on an learning material and particular uses that are performed on it. © 2010 IEEE.</textarea> 
                       <div class="controls">
                       <a href=# id="calculate" class="medium button go">Procesar</a>
                     <a href=# id="reset" class="medium button reset">Borrar</a>

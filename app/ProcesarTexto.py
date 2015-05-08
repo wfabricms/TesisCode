@@ -8,10 +8,11 @@ from urllib import quote_plus
 class ProcesarTexto():
 	def validateTextLenguage(self, text):
 		# Lista de idiomas disponibles en la nltk
-  		languages = ["spanish","english","dutch","finnish","german","italian","portuguese","turkish","danish","french","hungarian","norwegian","russian","swedish"]
-  		#languages = ["english"]
+		print "text idioma detec"
+  		languages = ["spanish","english","dutch","finnish","german","italian","portuguese","turkish","danish","french","hungarian","norwegian","russian"]
+  		#languages = ["russian"]
 		# Texto a analizar
-		text = "Texto a analizar y del cual detectar el idioma en el que se encuentra"
+		#text = "Texto a analizar y del cual detectar el idioma en el que se encuentra"
  		# Dividimos el texto de entrada en tokens o palabras unicas
  		tokens = nltk.tokenize.word_tokenize(text)
  		tokens = [t.strip().lower() for t in tokens] # Convierte todos los textos a minusculas para su posterior comparacion
@@ -19,15 +20,20 @@ class ProcesarTexto():
  		lang_count = {}
 		# Por cada idioma
 		for lang in languages:
-			stop_words = unicode(nltk.corpus.stopwords.words(lang))
-     		lang_count[lang] = 0 # Inicializa a 0 el contador para cada idioma
-     		# Recorremos las palabras del texto a analizar
-		for word in tokens:
-			if word in stop_words: # Si la palabra se encuentra entre las stopwords, incrementa el contador
-				lang_count[lang] += 1
-		# Obtiene el idioma con el numero mayor de coincidencias
+			stop_words = nltk.corpus.stopwords.words(lang)
+			lang_count[lang] = 0 # Inicializa a 0 el contador para cada idioma
+			#print lang
+			#print stop_words
+			for word in tokens:
+				#print word
+				for stop in stop_words:
+					if word == stop: # Si la palabra se encuentra entre las stopwords, incrementa el contador	
+						lang_count[lang] += 1
+			#print lang_count[lang]
+			#print ""
+			# Obtiene el idioma con el numero mayor de coincidencias
  		detected_language = max(lang_count, key=lang_count.get) 
- 		print detected_language
+ 		
  		return detected_language
 
  	def validateTextCharacter(self, text):
@@ -66,6 +72,7 @@ class ProcesarTexto():
 	    duplaTag = []
 	    for tag in tags:
 	        #tokentag.append(tag.split())
+	        #print tag
 	        duplaTag.append((tag.split()[0],tag.split()[1]))
 		#duplaTag = [(i[0].encode('utf-8'),i[1].encode('utf-8')) for i in tokentag]
 	        #for i in tokentag:
@@ -85,11 +92,10 @@ class ProcesarTexto():
 	def AplicarChunker(self, sentenciaTageada):
 		grammar = r"""
 		    ENT:
-		        {<NP.*|JJ>*<NP.*>}  
+		        {<NP.*|JJ>*<NP.*>} 
 		        
 		    ENTCOMP:
 		        {<ENT><IN><ENT>}
-		        {<ENT>+<NN.>+}	
 		    SUST:
 		    	{<NN.*|JJ>*<NN.*>}
 		    	{<NN.*>}	    	

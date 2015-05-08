@@ -1,5 +1,15 @@
 
   $(function() {
+    $('a#reset').bind('click', function() {
+        function ColocarHtml(rst, rstUp){
+
+            //rst += "<p><a href=# id=verJson>Ver Json</a>";
+            document.getElementById("resultado").innerHTML = rst;
+            document.getElementById("resulUp").innerHTML = rstUp;
+        }
+                document.getElementById("textMain").innerHTML = "...";
+                ColocarHtml(rst, rstUp)
+                });
     
     $('a#calculate').bind('click', function() {
         check1 = document.getElementById("check1");
@@ -196,6 +206,54 @@
                 rst += "</tr>";
             }
             rst += "</table>"
+
+            rst += "<p class=\"subtRest\">Keyword Compuestas</p>"
+            rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidad </td><td class=\"colData2\"> Tipo </td><td class=\"colData2\"> Enlace </td></tr>"
+            for (var i = 0; i < data.result['KeyWordsCompDesambiguadas'].length; i++) 
+            {
+                rst += "<tr> <td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['KeyWordsCompDesambiguadas'][i]['label'] +"</td>" ; 
+
+                if (data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResource'])
+                {
+                    rst += "<td  class=\"colData1\">"
+                    for ( var j = 0; j <  data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResourceType'].length; j++)
+                    {
+                        rst += "<a href = \""+data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResourceType'][j] + "\">"+ data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResourceType'][j] +"</a><br>"
+                    }
+                    rst += "</td>"
+                    rst += "<td class=\"colData1\">"+  "<a href=\""+data.result['KeyWordsCompDesambiguadas'][i]['dbpediaResource'] +"\" >DBpedia</a> "+ "</td>";
+                }else{
+                    rst += "<td  class=\"colData1\"></td><td  class=\"colData1\"></td>"
+                }
+
+                rst += "</tr>";
+            }
+            rst += "</table>"
+
+            rst += "<p class=\"subtRest\">Keywords Simples</p>"
+            rst += "<table>"
+            rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidad </td><td class=\"colData2\"> Tipo </td><td class=\"colData2\"> Enlace </td></tr>"
+            for (var i = 0; i < data.result['KeyWordsSimpDesambiguadas'].length; i++) 
+            {
+                rst += "<tr> <td class=\"colNum1\">" + (i+1) +" </td><td class=\"colData1\">"+  data.result['KeyWordsSimpDesambiguadas'][i]['label'] +"</td>" ; 
+
+                if (data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResource'])
+                {
+                    rst += "<td  class=\"colData1\">"
+                    for ( var j = 0; j <  data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResourceType'].length; j++)
+                    {
+                        rst += "<a href = \""+data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResourceType'][j] + "\">"+ data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResourceType'][j] +"</a><br>"
+                    }
+                    rst += "</td>"
+                    rst += "<td class=\"colData1\">"+  "<a href=\""+data.result['KeyWordsSimpDesambiguadas'][i]['dbpediaResource'] +"\" >DBpedia</a> "+ "</td>";
+                }else{
+                    rst += "<td  class=\"colData1\"></td><td  class=\"colData1\"></td>"
+                }
+
+                rst += "</tr>";
+            }
+            rst += "</table>"
             rst += "</div>"
             return rst;              
         }
@@ -364,9 +422,9 @@
                     rst += "</div>"
                 }
                     ColocarHtml(rst,rstUp);
-                    $('a#verJson').bind('click', function() {
-                    document.getElementById("tjson").innerHTML = JSON.stringify(data);
-                    });
+                $('a#verJson').bind('click', function() {
+                document.getElementById("tjson").innerHTML = JSON.stringify(data);
+                });
                 
             });
         }
@@ -396,6 +454,7 @@
         
         var rstUp = "<div class=\"spinner\">  <div class=\"bounce1\"></div>  <div class=\"bounce2\"></div>  <div class=\"bounce3\"></div> </div>"
         rstUp = ""
+
 
 
 

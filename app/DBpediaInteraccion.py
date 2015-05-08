@@ -20,6 +20,25 @@ class DbepdiaInteraccionRecursos():
 		tittletype = tittletype[:-1]
 		return tittletype
 
+	def getQueryKeywordSimple(self, term):
+		SparqlQuery = """
+			SELECT distinct ?x
+			From <http://data.utpl.edu.ec/dbpedia> 
+			WHERE {
+				?x rdfs:label '"""+term+"""'@en.
+				
+				OPTIONAL {?x <http://dbpedia.org/ontology/wikiPageDisambiguates>  ?o.}
+				OPTIONAL {?x <http://dbpedia.org/ontology/wikiPageRedirects>  ?x2.}
+				OPTIONAL {?x2 <http://dbpedia.org/ontology/wikiPageDisambiguates>  ?o2.}
+				FILTER(!bound(?o))
+				FILTER(!bound(?o2))
+
+			}
+		"""
+		return SparqlQuery
+
+
+
 	def getQuery(self, term):
 		SparqlQueryPrefix = """
 			PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -118,10 +137,26 @@ class DbepdiaInteraccionRecursos():
 			if len(results["results"]["bindings"]) > 0 : 
 				abstract = self.ExtraerNombres(objProcesarTexto.tokenizarSentencias(results["results"]["bindings"][0]["abstract"]["value"])[0])
 				recDbpediaAbstr["abstract"] = abstract
+				recDbpediaAbstr["abstract"] += recDbpediaAbstr["uri"][len("http://dbpedia.org/resource/"):].replace('_',' ').replace('(','').replace(')','').split()
 			else:
 				recDbpediaAbstr["abstract"] = recDbpediaAbstr["uri"][len("http://dbpedia.org/resource/"):].replace('_',' ').replace('(','').replace(')','').split()
 			recursosDbpediaAbstr.append(recDbpediaAbstr)
 		return recursosDbpediaAbstr # return [{"uri":"", "abstract":""}, {"uri":"", "abstract":""}]
+
+	def extraerRecursosKeywordsSimples(self, recurso):
+		servidor = "http://apolo.utpl.edu.ec/vtitanio/sparql"
+		#print recurso
+		filterText = self.PreparaFiltroTexto(recurso)
+		results = self.ejecutarQuery(self.getQueryKeywordSimple(filterText),servidor)
+		#print results
+		if len(results["results"]["bindings"]):
+			uris = self.extraeListaDesdeJson(results)
+		else:
+			return ""
+		if len(uris): u = uris[0]
+		else: return ""
+		return u
+
 
 	def ExtraerNombres(self, sentence):
 	 	ett = objProcesarTexto.etiquetar(objProcesarTexto.tokenizarPalabras(sentence))

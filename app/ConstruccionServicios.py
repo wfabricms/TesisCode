@@ -5,25 +5,30 @@ from Desambiguacion import Desambiguacion
 class ConstruccionServicios():
 	#objProcesarTexto = ProcesarTexto()
 	def TokenizacionSentencias(self, text):
+		print "TOKENIZACION DE SENTECIAS"
 		if len(text)  < 2:
-			print "err segementacion"
 			return {"err":"error no text"}
 		objProcesarTexto = ProcesarTexto()
 		text = objProcesarTexto.validateTextCharacter(text)
+		lang =  objProcesarTexto.validateTextLenguage(text)
+		if lang != 'english':
+			#return {"err":"Text is not English. "+lang+" unsupported"}
+			return {"err":"Text unsupported or language unsupported"}
 		data = {}
 		listSentencias = objProcesarTexto.tokenizarSentencias(text)
 		data['NumSentencias'] =  len(listSentencias)
 		data['TokensSentencias'] = listSentencias
 		#print data
-		print data['TokensSentencias'][0]
-		if objProcesarTexto.validateTextLenguage("hola mundo") != "english" :
-			print "NO es ingles"
-			return {"err":"Language not supported "}
+		#print data['TokensSentencias'][0]
+		#if objProcesarTexto.validateTextLenguage("hola mundo") != "english" :
+		#	print "NO es ingles"
+		#	return {"err":"Language not supported "}
 		
 		return data
 
 	def EtiquetarTT(self, text):
 		data = self.TokenizacionSentencias(text)
+		print "ETIQUETADO"
 		if "err" in data:
 			#print "err etiquetqad"
 			return data
@@ -49,6 +54,7 @@ class ConstruccionServicios():
 
 	def TokenizarTT(self, text):
 		data = self.TokenizacionSentencias(text)
+		print "TOKENIZACION DE PALABRAS"
 		if "err" in data:
 			return data
 		TokensEnPalabras = []
@@ -65,9 +71,9 @@ class ConstruccionServicios():
 
 	#tokenizarTreeTagger
 
-
 	def ExtracionEntidadesAndKeywords(self, text, d):
 		data = self.EtiquetarTT(text)
+		print "EXTRACCION DE ENTIDADES"
 		if "err" in data:
 			return data
 		#global objProcesarTexto
@@ -77,46 +83,114 @@ class ConstruccionServicios():
 		data['Entidades'] = []
 		listaEntidades = []
 		data['EntidadesDesambiguadas'] = []
+		data['KeyWordsCompDesambiguadas'] = []
+		data['KeyWordsSimpDesambiguadas'] = []
 		for sentenciaTokenizada in data['EtiquetadoPalabras']:
 			entidades = []
 			listaEntidades = []
 			KeywordsCompuestas = []
-			data['KeywordsSimples'] = data['KeywordsSimples'] + [w for (w, x) in sentenciaTokenizada if len(w)>1  and x =='NN' or x =='NNS']
+			KeywordsSimples = []
+			KeywordsSimples = KeywordsSimples + [w for (w, x) in sentenciaTokenizada if len(w)>1  and x =='NN' or x =='NNS']
 			treeChunk = objProcesarTexto.AplicarChunker(sentenciaTokenizada)
 			for x in treeChunk.subtrees():
-				if x.node == 'SUST':	
+				#print "NODE > ", x.node
+				#if x.label == 'SUST':
+				if x.node == 'SUST':
 					word = [w[0] for w in x.leaves()]
 					name = " ".join(word)
-					if len(name) >1 and name not in data['KeywordsSimples']: KeywordsCompuestas.append(name)
+					if len(name) >1 and name not in KeywordsSimples: KeywordsCompuestas.append(name)
 				if x.node == 'ENTCOMP' or x.node == 'ENT':
 					word = [w[0] for w in x.leaves()]
 					name = " ".join(word)
 					if len(name) >1: entidades.append(name)
 			data['Entidades'] = data['Entidades']  + entidades
 			data['KeywordsCompuestas'] = data['KeywordsCompuestas']  + KeywordsCompuestas
+			data['KeywordsSimples'] = data['KeywordsSimples']  + KeywordsSimples
 			data['NumKeywordsSimples'] = len(data['KeywordsSimples'])
 			data['NumKeywordsCompuestas'] = len(data['KeywordsCompuestas'])
 			data['NumEntidades'] = len(data['Entidades'])
 			if d == 1:
 				objDbInteracion = DbepdiaInteraccionRecursos()
-				objDesamb = Desambiguacion()
-				#for entidad in entidades+data['KeywordsSimples']+data['KeywordsCompuestas']:
-				#for entidad in entidades:
-				for entidad in entidades + KeywordsCompuestas:
-					print "  >>  ", entidad
-					estruDat = {"label":"", "frequency":"","dbpediaResource":"","dbpediaResourceType":[],"DBpedRList":[], "type":0}
+				#print "ENTIDADES"
+				typeresource = 'EntidadesDesambiguadas'
+				data = self.RecolectDataEntitiesKComp(data,entidades, sentenciaTokenizada, objDbInteracion, typeresource)
+				#print "KEYWORDS COMPUESTAS"
+				typeresource = 'KeyWordsCompDesambiguadas'
+				data = self.RecolectDataEntitiesKComp(data,KeywordsCompuestas, sentenciaTokenizada, objDbInteracion, typeresource)
+				
+				#print "KEYWORDS SIMPLES"
+				KeywordsSimples = list(set(KeywordsSimples))
+				for entidad in KeywordsSimples:
+					#print "  >>  ", entidad
+					estruDat = {"label":"", "dbpediaResource":"","dbpediaResourceType":[],"DBpedRList":[]}
 					estruDat["label"] = entidad
-					for i in data['EntidadesDesambiguadas']:
+					for i in data['KeyWordsSimpDesambiguadas']:
 						if entidad in i['label']:
-							#print "ENTIDAD IGUAL O CONTIENE>> ", entidad, " >> ", i['label']
-							estruDat['DBpedRList'] = i['DBpedRList']
+							estruDat['dbpediaResource'] = i['dbpediaResource']
 							break
-					if estruDat['DBpedRList'] == []:
-						estruDat['DBpedRList'] = objDbInteracion.extraerListRecursoDBpedia(entidad)
+					if estruDat['dbpediaResource'] == "":
+						estruDat['dbpediaResource'] = objDbInteracion.extraerRecursosKeywordsSimples(entidad)
 					listaEntidades.append(estruDat)
-				data['EntidadesDesambiguadas'] += objDesamb.LeskAlgoritm(listaEntidades, objDbInteracion.ExtraerNombres(data['TokensSentencias'][data['EtiquetadoPalabras'].index(sentenciaTokenizada)]))
-				if data['EtiquetadoPalabras'].index(sentenciaTokenizada) == len (data['EtiquetadoPalabras']) -1: 
-					#for i in data['EntidadesDesambiguadas']:
-					data['EntidadesDesambiguadas'] = objDbInteracion.TypeExtract(data['EntidadesDesambiguadas'])
-				data['NumEntidadesDesambiguadas'] = len(data['EntidadesDesambiguadas'])
+					data['KeyWordsSimpDesambiguadas'].append(estruDat)
+				
+				
+		#print "CONTANDO Y ELIMINADO"
+		#print ""
+		#print "ENTIDADES"
+		typeresource = 'EntidadesDesambiguadas'
+		data = self.contarDataEnlazada(data, typeresource)
+		#print "KEYWORDS COMPUESTAS"
+		typeresource = 'KeyWordsCompDesambiguadas'
+		data = self.contarDataEnlazada(data, typeresource)
+		#print "KEYWORDS SIMPLES"
+		typeresource = 'KeyWordsSimpDesambiguadas'
+		data = self.contarDataEnlazada(data, typeresource)
+		data['NumEntidadesDesambiguadas'] = len(data['EntidadesDesambiguadas']) + len(data['KeyWordsCompDesambiguadas']) + len(data['KeyWordsSimpDesambiguadas'])
+		#print "TYPO DE RECURSOS"
+		if data['EtiquetadoPalabras'].index(sentenciaTokenizada) == len (data['EtiquetadoPalabras']) -1: 
+			for i in data['EntidadesDesambiguadas']:
+				data['EntidadesDesambiguadas'] = objDbInteracion.TypeExtract(data['EntidadesDesambiguadas'])
+			for i in data['KeyWordsCompDesambiguadas']:
+				data['KeyWordsCompDesambiguadas'] = objDbInteracion.TypeExtract(data['KeyWordsCompDesambiguadas'])
+			for i in data['KeyWordsSimpDesambiguadas']:
+				data['KeyWordsSimpDesambiguadas'] = objDbInteracion.TypeExtract(data['KeyWordsSimpDesambiguadas'])
+				
 		return data
+
+	def contarDataEnlazada(self, data, typeresource):
+		m = []
+		for d in data[typeresource]:
+			if d['dbpediaResource'] == "": 
+				continue	
+			for e in data[typeresource]:
+				if e['dbpediaResource'] == "": 
+					continue
+				#print "    >>    	", d['label'], " ", data[typeresource].index(d)
+				if d['dbpediaResource'] != e['dbpediaResource'] and d not in m:
+					#print "    >>    	XXXXXx", d['label'], " ", data[typeresource].index(d)
+					m.append(d)
+		data[typeresource] = m
+		return data
+
+	def RecolectDataEntitiesKComp (self, data, entidades, sentenciaTokenizada, objDbInteracion, typeresource):
+		objDesamb = Desambiguacion()
+		listaEntidades = []
+		entidades = list(set(entidades))
+		for entidad in entidades:
+			#print "ENTIDAD = ", entidad
+			find = False
+			#print "  >>  ", entidad
+			estruDat = {"label":"", "dbpediaResource":"","dbpediaResourceType":[],"DBpedRList":[]}
+			estruDat["label"] = entidad
+			
+
+			#print "  >> ** ", entidad
+			if estruDat['DBpedRList'] == []:
+				estruDat['DBpedRList'] = objDbInteracion.extraerListRecursoDBpedia(entidad)
+			#print estruDat['label']
+			#print estruDat['DBpedRList']
+			listaEntidades.append(estruDat)
+		data[typeresource] += objDesamb.LeskAlgoritm(listaEntidades, objDbInteracion.ExtraerNombres(data['TokensSentencias'][data['EtiquetadoPalabras'].index(sentenciaTokenizada)]))
+		return data
+		
+
