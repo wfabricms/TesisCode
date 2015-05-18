@@ -1,293 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0023)http://www.utpl.edu.ec/ -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es" dir="ltr" class="js"><head>
-
-
-
-
- <style type="text/css">
-
-#logo {
-  width: 140%;
-  margin: -12px;
-}
-
-#tlt {
-    float: right;
-  display: block;
-  /* height: 79px; */
-  width: 35%;
-  margin: 30px 0 0 0;
-  color: #FFF;
-  font-size: 18px;
-  padding-right: 140px;
-  letter-spacing: 2px;
-  /* font-weight: 900; */
-}
-
-
-
- #inic{
-height: 220px;  
- }
-
- #resultado #resultado #contenido_pestanas { 
-height: auto;
-
-  }
-
- body {  margin: 0;  padding: 0;  font: 12px/170% Arial, Helvetica, sans-serif;  background: url({{ url_for('static', filename = 'img/bg.jpg') }}) repeat-x #EAE9E1;  color: #333;}
-
-a {color:#004370; text-decoration: none;}
-a:hover {text-decoration: underline}
-ul {margin:10px 0 0 10px;padding: 0 0 0 10px}
-ul li {padding: 0 0 0 2px }
-*html ul li a {padding:0; margin:0;line-height: 15px; }
-*html ul li{list-style-image:none; list-style: none; padding:0; line-height: 15px; margin:0}
-*html ul{list-style-image:none; list-style: none;line-height: 15px;}
-.containerdiv {  height: auto; margin: 0 auto;  width:924px;  padding:0 15px;  position: relative;  clear: both;  }
-p{line-height: 15px}
-
-.moduletext { font-family: Arial, Helvetica, sans-serif; font-size: :11px;}
-
-#header{display: block;clear: both;overflow: hidden;margin-bottom: 1px;}
-#body{background: #fff;height: auto;overflow: hidden; padding-bottom: auto; }
-#bodyheader{width: 684px;height:38px;clear:both;float:none;overflow: hidden;margin:0 0 0 0;position: relative;border-bottom: 1px dotted #999;}
-#bodyheader h2{padding:0;margin:10px 0 0 0;text-transform:uppercase;letter-spacing:-1px;font-family:Times;font-weight:normal;float:left;display:block;font-size: 23px;color:#004370;}
-#bodyheader .breadcrumb{position: absolute;top:10px;left:236px;}
-#bodyheader .breadcrumb a {color:#999;font-family: Arial, "MS Trebuchet", sans-serif;}
-#bodyheader .breadcrumb a.active {font-weight:bold;color:#333;}
-#footer{width:100%;background: #F2F2F2;border-top: 2px solid #004370;margin:0; padding: 20px 0 10px 0;clear: both;overflow: hidden;color:#666;font-size: 11px;}
-
-
-#left{width: 224px;float:left;margin:15px 14px 0 0;}
-
-#mainconent{width: 452px;float:left;margin:15px 14px 0 0;}
-#mainconent ul li{ list-style-image: url(/sites/all/themes/utpl/images/bullet.jpg);}
-.rssFeed ul li{ list-style-image: url(/sites/all/themes/utpl/images/bullet.jpg); line-height: 1.3;}
-.rssFeed p{ }
-.homecentermodule ul li{ list-style-image: url(/sites/all/themes/utpl/images/bullet.jpg); }
-#right{width: 205px;float:left; /*margin:15px 0 0 0;*/ margin: -3px 0 0 0; border-left: 1px dotted #999;padding-left:12px;}
-#searchbar{border:1px solid #BACBE3;width:222px;height:20px;display:block;position: absolute;top:57px;right: 30px;}
-
-#searchbar #edit-search-block-form-1{height:16px;padding:2px;width:189px;background:#EDEDED;float:left;border:none;color:#004370;}
-#searchbar #searchbt{height:20px;width:29px;float:left;}
-#servenlineadiv{display:none;position: absolute;top:25px;right: 0px;background: #004370;border:1px solid #ccc;border-top:none; padding-bottom: 0px}
-#servenlineadiv a{color:#fff; padding: 1px 8px 1px 5px;display: block}
-#servenlineadiv a:hover{color:#004370; background: #DEDDD8; text-decoration: none}
-#servenlineadiv ul {margin:0;padding: 0;}
-#servenlineadiv ul li{list-style: none; list-style-image: none;  }
-
-*html #servenlineadiv ul li{list-style: none;}
-*html #servenlineadiv a{display: inline;}
-
-
- 
-#headerquickacces{position: absolute;display: block;}
-#headerquickacces .language-link{display:none;}
-#homelogo {float:left;display: block;height: 79px;width: 179px;margin:20px 0 0 0;}
-
-#headerquickacces{position: absolute;top:6px;right: 20px;}
-
-#headerquickacces a{color:#ccc;  font-size: 10px; margin:0 10px;font-weight: bold; float:left}
-#headerquickacces a:hover{color:#fff; }
-
-ul.enlinea li a{font-size: 11px}
-
-.hqas {margin:3px 0 0 0;display: block;height: 15px;width: 1px;border-left: 1px solid #f0f0f0;float:left;overflow: hidden;}
-
-#homebtn{float:left;}
-
-/*   <<<<<<  AREA PERSONALIZADA PARA PRESENTAR VENTANA FLOTANTE  >>>>>>*/
-
-.escuela-ventana {
-  text-align: justify;
-    width: 620px;
-    height: 400px;
-    overflow-x: hidden;
-}
-.info-escuela {
-  width:420px;
-  height:auto;
-  background-color:#FFF;
-  border-right: 1px dotted #999;
-  padding: 0 15px 0 15px;
-  text-align: justify;
-}
-.derecha-escuela {
-  background: url(/sites/all/themes/utpl/images/bgh3.jpg) repeat-x bottom;
-  padding: 5px 5px 15px 0;
-  margin-left: 20px;
-}
-.derecha1-escuela {
-  padding: 5px 5px 15px 5px;
-  margin-left: 20px;
-}
-.right-escuela {
-  width:140px;
-  height:auto;
-  margin-right:22px;
-  float:right;
-  padding: 0 3px 0 -5px;
-}
-
-#menusuperior{
-  width: 100%;
-  background: url(images/bg.jpg) repeat-x;
-  position: fixed;
-  z-index: 10000;
-  margin: 0;
-  padding: 0;
-  left: 0;
-}
-#menubar{
-  float: right;
-  font-family: Arial;
-  background: #003F72;
-}
-ul#navbar {
-list-style-type: none;
-margin: 0;
-padding: 0;
-}
-ul#navbar li {
-float: left;
-background: url(images/bg.jpg) repeat-x;
-font-size: 11px;
-padding: 1px 15px;
-border-right: 1px solid #fff;
-list-style: none !important;
-}
-ul#navbar a {
-color: #fff;
-text-decoration: none;
-text-align: center;
-display: block;
-width: 100%;
-}
-ul#navbar a:hover {
-background: url(images/bg.jpg) repeat-x;
-}
-ul#navbar ul {
-top: 19px;
-background: url(images/bg.jpg) repeat-x;
-display: none;
-}
-ul#navbar li li{
-list-style-type: none !important;
-}
-ul#navbar li:hover ul {
-display: block;
-position: absolute;
-padding: 2px 15px;
-margin: 0;
-padding: 0;
-list-style: none !important;
-}
-ul#navbar li:hover li {
-float: none;
-border-right: 1px solid #fff;
-list-style: none !important;
-}
-
-/*fin de los estilos de los iconos de las redes sociales*/
-
-
-
-
-#sitenavigation{display:block;float: left;clear: both;height: 28px;margin:10px 0 0 0;width: 100%;overflow: hidden;}
-
-ul.navigation-links {margin:0;padding:0;float:left;}
-ul.navigation-links li{display: inline; }
-ul.navigation-links li a{display: block;padding:5px 16px 3px 16px;float: left;border-left:1px solid #fff; border-right:1px solid #ccc}
-*html ul.navigation-links li a{display: block;padding:5px 35px 8px 35px;float: left; line-height: 20px}
-ul.navigation-links li a.active{display: block;padding:5px 35px 3px 35px;float: left; text-decoration:none;color:#fff;background: #004370;}
-ul.navigation-links li.active-trail a{display: block;padding:5px 35px 3px 35px;float: left; text-decoration:none;color:#fff;background: #004370;}
-ul.navigation-links li a:hover{text-decoration:none;color:#fff;background: #004370;}
-
-#submenu{display: none;overflow: hidden;background: #fff;}
-#submenucontainer {border:1px solid #ababab;border-top:none;width: 875px;padding: 10px;float: left;display: block;overflow: hidden;}
-#submenucontainer ul {float: left;display: block;overflow: hidden;padding:0;margin:0 45px 0 0;}
-#submenucontainer ul li {list-style: none;list-style-image: none; }
-#submenucontainer ul li a{font-size: 11px;}
-#submenucontainer ul.submenutpl{margin:0 10px 0 20px;}
-#submenucontainer ul.submenudocencia{margin:0 10px 0 20px;}
-#submenucontainer ul.submenuinvestigacion{margin: 0 40px 0 24px;}
-#submenucontainer ul.submenumisiones{margin: 0 0 0 30px;}
-#submenucontainer ul.submenuvinculacion{margin: 0 0 0 65px;}
-#submenucontainer ul.submenucomunicacion{margin: 0 10px 0 10px;}
-#menuexpand{height: 13px;background: url(/sites/all/themes/utpl/images/expand.jpg) 0px 8px no-repeat;padding:5px 0 5px 25px;margin:8px 0  5px 0;}
-
-
-
-ul.footerlinks {padding:0; float: left; margin:0 0 0 -10px}
-*html ul.footerlinks {padding:0; float: left; margin:0 0 0 0px}
-
-ul.footerlinks li{float: left;border-right:1px solid #666;display: block; padding: 0;margin:0;}
-#contactinfo a {color:#666;font-size: 11px; display: block;padding:0px 8px 5px 8px;float: left;  height: 12px;  margin:-3px 0 0 0;}
-#contactinfo p{padding:0; margin: center; }
-*html #contactinfo p{line-height: 20px}
-*html #contactinfo ul.footerlinks li a{padding-top:3px; }
-#contactinfo {float:left; margin:0 0 0 30px}
-#footer #ids {position: absolute;right: 25px;margin: 0 0 0 80px;background:url(/sites/all/themes/utpl/images/ids.jpg); width:112px;height:23px;}
-#footer #ids:hover{float: left;margin: 0 0 0 80px;background:url(/sites/all/themes/utpl/images/firma_ids_utpl.png); width:112px;height:23px;}
-ul.leftnavigation li {list-style-image: none;}
-ul.leftnavigation li a{ list-style: none !important; color:#333; background: #DEDDD8; display: block;padding:2px 0 2px 10px; margin:0 0 2px 0; font-size: 11px; text-decoration: none;}
-
-ul.leftnavigationsitemap li a{color:#333; background: #F5F5F5; display: block;padding:2px 0 2px 10px; margin:0 0 2px 0; font-size: 11px; text-decoration: none;}
-*html ul.leftnavigationsitemap li {list-style-image: none; list-style-type: none;margin:0; padding:0;}
-*html ul.leftnavigationsitemap li a {margin:0; padding:0}
-*html li.leaf {margin:0; padding:0; border:1px solid #fff}
-ul.leftnavigationsitemap li.active-trail a{background: #C2C2BD; color:#fff}
-ul.leftnavigationsitemap li a.active{color:#fff; background: #C2C2BD; display: block;padding:2px 0 2px 5px; margin:0 0 2px 0; font-size: 11px; text-decoration: none;}
-ul.leftnavigationsitemap li {list-style: none; padding:0; margin:0}
-ul.leftnavigationsitemap{padding:0; margin:0}
-ul.leftnavigationsitemap li ul.leftnavigationsubmenu li a {background: none;color:#333;}
-ul.leftnavigationsubmenu li{padding: 0;}
-ul.leftnavigationsubmenu li a{background:none; padding:2px 0 2px 10px;}
-ul.leftnavigationsitemap li ul.leftnavigationsubmenu li a:hover{background:#F5F5F5}
-
-ul.leftnavigationsitemap .leftnavigationsubmenu li a{padding:2px 0 2px 20px;} 
-
-
-
-*html ul.leftnavigation li {list-style: none; list-style-image: none; list-style-type: non;margin:0 padding:0e}
-*html ul.leftnavigation li a {margin:0 padding:0}
-*html li.leaf {margin:0 padding:0; border:1px solid #fff}
-ul.leftnavigation li.active-trail a{background: #C2C2BD; color:#fff}
-ul.leftnavigation li a.active{color:#fff; background: #C2C2BD; display: block;padding:2px 0 2px 10px; margin:0 0 2px 0; font-size: 11px; text-decoration: none}
-ul.leftnavigation li {list-style: none; padding:0; margin:0}
-ul.leftnavigation{padding:0; margin:0}
-ul.leftnavigation li ul.leftnavigationsubmenu li a {background: none;color:#333;}
-ul.leftnavigationsubmenu li{padding: 0;}
-ul.leftnavigationsubmenu li a{background:none; padding:2px 0 2px 20px;}
-ul.leftnavigation li ul.leftnavigationsubmenu li a:hover{background:#E4E4E4}
-ul.leftnavigationsubmenu li a.active{background:#E4E4E4;padding:2px 0 2px 20px;}
-ul.leftnavigation li ul.leftnavigationsubmenu li a.active{background: #E4E4E4}
-ul.leftnavigation.leftnavigationsubmenu.desactivado li{display:none}
-li.expanded.last.active-trail ul li{display: block}
-li.expanded.active-trail ul.leftnavigation.leftnavigationsubmenu.desactivado li{display: block}
-li.expanded.first.active-trail ul li{display: block}
-#mainconenthome{ width: 682px;float:left;margin:10px 14px 0 0;}
-
-.rssitem {font-size:11px;line-height: 11px;padding: 0 0 5px 0; border-bottom:1px dotted #999999; margin: 0 0 15px 0  }
-.rssitem img{float:left; background: url(/sites/all/themes/utpl/images/rssimgbg.jpg); padding: 2px 7px 2px 2px; margin:0 5px 20px 0 }
-.rssitem a{font-weight: bold}
-a.blocklink {display: block; background: #EDEDED; color:#004370; font-weight: bold; padding: 3px 0 3px 5px; line-height: 11px;overflow:hidden;clear:both}
-.rss {position: relative}
-.rssicon{position: absolute; right: 4px; top:4px;}
-.eventos {margin:20px 0 30px 0}
-#homeheaderimages {
-    position:relative;
-    width:686px;
-    height:249px;
-    margin:0 0 20px 0;
-    padding: 0 0 20px 0;
-    border-bottom: 1px dotted #999; 
+<!DOCTYPE html><!--Doctype que define que es una pagina html5-->
+<html lang="en"><!--Se define el lenguaje de la página como español-->
+  <head>
     
-}
 
-
+    <style type="text/css">
       .controls{
     text-align: right;
     margin-top: -2px;
@@ -323,25 +39,25 @@ a.blocklink {display: block; background: #EDEDED; color:#004370; font-weight: bo
 .colNum1{
   text-align: right;
   padding-right: 10px; 
-  border-left: 1px solid #004370;
-  border-right: 1px solid #004370;
-  border-bottom: 1px solid #004370;
-  border-top: 1px solid #004370;
+  border-left: 1px solid #2F426A;
+  border-right: 1px solid #2F426A;
+  border-bottom: 1px solid #2F426A;
+  border-top: 1px solid #2F426A;
   width: 20px;
   color: #222;
-    /*background-color: #004370;*/
+    /*background-color: #2F426A;*/
 
 }
 .colData1{
   text-align: left;
   padding-left: 10px; 
-  border-left: 1px solid #004370;
-  border-right: 1px solid #004370;
-  border-bottom: 1px solid #004370;
-  border-top: 1px solid #004370;
+  border-left: 1px solid #2F426A;
+  border-right: 1px solid #2F426A;
+  border-bottom: 1px solid #2F426A;
+  border-top: 1px solid #2F426A;
   width: 700px;
     color: #222;
-    /*background-color: #004370;*/
+    /*background-color: #2F426A;*/
 }
 
 .colNum2{
@@ -392,6 +108,7 @@ a.boton_demo                    {   position: absolute; top: 580px; left: 70px; 
 }
 .back {
     margin: auto;
+    width: 70%;
     background-color: #fff;
     font-style: normal;
     font-size: 13px;
@@ -413,16 +130,16 @@ h1 {
   }
  
 h2 {
-    
+    font-family: "futura-pt", helvetica, sans-serif;
     font-weight: 700;
     line-height: 1.1;
     text-transform: uppercase;
-    font-size: 1.700em;
-    margin: 15px;
-    text-shadow: 0px 1px 1px #2C4887;
+    color: #f8f8f8;
+  font-size: 2.0em;
+  margin: 15px;
   
   
-  color: #FFCD08; text-shadow: 0px 1px 1px #2C4887;
+  color: #222; text-shadow: 0px 1px 1px #ccc;
 }
 h4 {
     font-family: "futura-pt", helvetica, sans-serif;
@@ -475,7 +192,7 @@ background-size:12px 11px;
 
 input[type=checkbox]:checked + span.mcheck {
 text-decoration:none;
-background:#004370 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNpi+P//PwMNsS4QbwBiLnQ5WlqqAsRP/0PARiBmoYfFkkB8+z8qWALEjLS0mB+IL/3HDibSymJQXB7/jx/UgNSCvU4lwAbEG4DYkwi1WUxUspQZiOcRaSkIWOAKMk0Sg3jaf+IBOIVjMyQWiH8DsR+RljaTYOkBWJ5GNwRk2R+ooh9A7ETA0jwSLL0ATfEYqRpkyVc0xR+A2AyHpdFA/I9IS0F5WhRbAWIEtQQbeAXE6lhC5jeRlj4GYgVsRaYK1HBCmmWgmuyxhAwu8BpaXjNgs/gYkYbcAGIXPCGDDkCOM8eVPkCEFhE+JhX8BGJnfAkTxgC57BOVLAXlihBC2RA9Vf+k0FJQKk8nJv+jCwQi5WNyQAWxpR02wRQS8icy6CKlmMUlUUGipfOQK3lKLAbhdhIKfWZS6258kiAfzCZg6V4gZiOn0UBIAcgn63BYehK50Ke2xQxQH+3FUoqJUtJMIlYhLxAfxVJu09xiWENuMxCrUaNhCBBgAOAVfjALa5TLAAAAAElFTkSuQmCC) no-repeat 7% center;
+background:#2F426A url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNpi+P//PwMNsS4QbwBiLnQ5WlqqAsRP/0PARiBmoYfFkkB8+z8qWALEjLS0mB+IL/3HDibSymJQXB7/jx/UgNSCvU4lwAbEG4DYkwi1WUxUspQZiOcRaSkIWOAKMk0Sg3jaf+IBOIVjMyQWiH8DsR+RljaTYOkBWJ5GNwRk2R+ooh9A7ETA0jwSLL0ATfEYqRpkyVc0xR+A2AyHpdFA/I9IS0F5WhRbAWIEtQQbeAXE6lhC5jeRlj4GYgVsRaYK1HBCmmWgmuyxhAwu8BpaXjNgs/gYkYbcAGIXPCGDDkCOM8eVPkCEFhE+JhX8BGJnfAkTxgC57BOVLAXlihBC2RA9Vf+k0FJQKk8nJv+jCwQi5WNyQAWxpR02wRQS8icy6CKlmMUlUUGipfOQK3lKLAbhdhIKfWZS6258kiAfzCZg6V4gZiOn0UBIAcgn63BYehK50Ke2xQxQH+3FUoqJUtJMIlYhLxAfxVJu09xiWENuMxCrUaNhCBBgAOAVfjALa5TLAAAAAElFTkSuQmCC) no-repeat 7% center;
 background-size:12px 11px;
 }
 
@@ -546,7 +263,7 @@ background-size:12px 11px;
                           }
                           
   .go.button, .go.button:visited        { background-color: #333; }
-  .go.button:hover              { background-color: #FFCD08; }
+  .go.button:hover              { background-color: #2F426A; }
   .reset.button, .reset.button:visited      { background-color: #333; }
   .reset.button:hover             { background-color: #dd5244; }
 
@@ -573,8 +290,15 @@ background-size:12px 11px;
 
 
 .color-1 {
-  background: #004370;
+  background: #2F426A;
 }
+
+
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
 
 nav a.aqui      {   text-shadow: 1px 1px 3px rgba(0,0,0,1);}
 
@@ -855,7 +579,7 @@ nav.cl-effect-1 a:focus {
         
                 document.getElementById("textMain").value = "";
                 var rst = ""
-                var rstUp = "<div id='inic'></div> "
+                var rstUp = ""
                 ColocarHtml(rst, rstUp)
                 });
     
@@ -882,7 +606,7 @@ nav.cl-effect-1 a:focus {
         }
 
         function Sentencias(data) {
-            rst = "<div id=\"opcion1\" style=\"display: block;\" class=\"center\">"
+            rst = "<div id=\"opcion1\" style=\"position: absolute;\" class=\"center\">"
             //rst += "<h3>Sentencias</h3>"
                     rst += "<table>"
                     rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Sentencias </td></tr>"
@@ -896,7 +620,7 @@ nav.cl-effect-1 a:focus {
         }
 
         function wordTokens(data) {
-            rst = "<div id=\"opcion2\" style=\"display: none; display: none;\">"
+            rst = "<div id=\"opcion2\" style=\"position: absolute; display: none;\">"
             
                     cont = 0
                     for (var i = 0; i < data.result['TokensPalabras'].length; i++) 
@@ -931,7 +655,7 @@ nav.cl-effect-1 a:focus {
         }
 
         function Etiquetado(data) {
-            rst = "<div id=\"opcion3\" style=\"display: none; display: none;\">"
+            rst = "<div id=\"opcion3\" style=\"position: absolute; display: none;\">"
             
                     cont = 0
                     for (var i = 0; i < data.result['EtiquetadoPalabras'].length; i++) 
@@ -964,7 +688,7 @@ nav.cl-effect-1 a:focus {
         }
 
         function ExtracionEyK(data) {
-            rst = "<div id=\"opcion4\" style=\"display: none; display: none;\">"
+            rst = "<div id=\"opcion4\" style=\"position: absolute; display: none;\">"
             rst += "<p class=\"subtRest\">Entidades</p>"
             rst += "<table>"
             rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td><td></td><td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidades </td></tr>"
@@ -1038,7 +762,7 @@ nav.cl-effect-1 a:focus {
         }
 
         function Enlace(data) {
-            rst = "<div id=\"opcion5\" style=\"display: none; display: none;\">"
+            rst = "<div id=\"opcion5\" style=\"position: absolute; display: none;\">"
             rst += "<p class=\"subtRest\">Entidades</p>"
             rst += "<table>"
             rst += "<tr> <td class=\"colNum2\"> # </td><td class=\"colData2\"> Entidad </td><td class=\"colData2\"> Tipo </td><td class=\"colData2\"> Enlace </td></tr>"
@@ -1273,7 +997,7 @@ nav.cl-effect-1 a:focus {
                     }
                     rstUp = Metadata(data, funcion)
                     
-                    rst += "<div id=\"json\" style=\"display: none; display: none;\"> <textarea id=\"tjson\" rows=\"11\" cols=\"85\"  readonly> </textarea> </div>  ";
+                    rst += "<div id=\"json\" style=\"position: absolute; display: none;\"> <textarea id=\"tjson\" rows=\"11\" cols=\"85\"  readonly> </textarea> </div>  ";
                     rst += "</div>"
                     rst += "</div>"
                 }
@@ -1443,56 +1167,24 @@ function onCheck5() {
     </script>
     <meta charset="utf-8"/><!--La codificacion del documento es UTF-8-->
     <title>Procesamiento de Texto - WS integrador</title><!--Se recomienda un titulo diferente para cada página del sitio web-->
-
-
-
-
-
-  
-  </head>
-  <body>
-
-       <link rel="stylesheet" href="./Universidad Tecnica Particular de Loja - U T P L   Ecuador_files/menu.css" type="text/css">
-      <div id="header" class="containerdiv">
-      <a href="http://www.utpl.edu.ec/" title="Universidad Tecnica Particular de Loja - U T P L | Ecuador " id="homelogo">
-      <img src="{{ url_for('static', filename = 'img/logo.png') }}" alt="Universidad Tecnica Particular de Loja - U T P L | Ecuador " id="logo"></a>
-
-      
-      <div  id="tlt"><strong>ENLACE Y ENRIQUECIMIENTO EN DATOS ENLAZADOS</strong></div>  
-
-      <div id="sitenavigation">
-        
-
-
-
-
-<ul class="navigation-links"><li class="menu-656 first"><a href="" onclick="location.reload();" title="">Inicio</a></li>
-<li class="menu-1740"><a href="/desarrollo" title="">Abstract</a></li>
-<li class="menu-693"><a href="/contactos" title="">Contactos</a></li>
-<li class="menu-654"><a href="http://www.utpl.edu.ec/" title="UTPL" target="_blank">UTPL</a></li>
-
-</ul>     
-
-
-</div>
-    </div>
     
-
-
-<div id="body" class="containerdiv">
-
-
-
-<header>
+  </head>
+ 
+  <body class="single demo">
+    <header>
       
  
+      <nav>
+        <div><a class="headMenu" href="http://www.utpl.edu.ec">UTPL</a></div>
+      <hr>
+      </nav>
       <hgroup>
-        <h2>Integración de Servicios Web </h2>
-        
+        <h2>Enlace y Enriquecimiento en Datos Enlazados</h2>
+        <h4>Piloto: dominio de datos Universitarios</h4>
       </hgroup>
     </header>
  
-   
+    <section>
 
       <div id="page" class="back">
     
@@ -1530,6 +1222,12 @@ function onCheck5() {
                       <span class="mcheck">Desambiguación y Enlace  <!--  <img src="{{ url_for('static', filename='img/candado.png') }}" alt="Smiley face" height="10" width="10">--></span>
                     </label>
 
+                    <!--
+                    <input type="checkbox" id="check1" name="option1" onClick="onCheck1()" checked> <label>Segmentación en Sentencias <label><br>
+                    <input type="checkbox" id="check2" name="option2" onClick="onCheck2()" checked> Tokenización <br>
+                    <input type="checkbox" id="check3" name="option3" onClick="onCheck3()" checked> Etiquetado <br>
+                    <input type="checkbox" id="check4" name="option4" onClick="onCheck4()" checked> Extracción de Entidades <br>
+                    <input type="checkbox" id="check5" name="option5" onClick="onCheck5()" checked> Desambiguación y Enlace -->
                     </div>
                   </td> 
                 </tr>
@@ -1540,57 +1238,60 @@ function onCheck5() {
     
      
     <div id="resulUp">  </div>  
-    <div id="resultado"> <div id="inic"></div> </div>    
+    <div id="resultado">  </div>    
     
+    
+    <!--<section class="color-1">
+        <nav class="cl-effect-1">
+          <a href="#">Wafture</a>
+          <a href="#">Sumptuous</a>
+          <a href="#">Scintilla</a>
+          <a href="#">Propinquity</a>
+          <a href="#">Harbinger</a>
+        </nav>
+      </section> -->
+    
+    
+    
+
+    <!--
+
+    <div id="light">      
+       <ul>
+        <li><a class="medium button red">Pink Button</a>
+        <a class="large button green">Green Button</a></li>
+       <li> <a class="large button blue">Blue Button</a>
+        <a class="large button red">Red Button</a></li>
+        <li><a class="large button orange">Orange Button</a>
+        <a class="large button yellow">Yellow Button</a></li>
+        </ul>
+ </div>       
+        
+ <div id="dark">       
+        <ul>
+        <li><a class="super button pink">Pink Button</a>
+        <a class="large button green">Green Button</a></li>
+       <li> <a class="medium button blue">Blue Button</a>
+        <a class="large button red">Red Button</a></li>
+       <li> <a class="small button orange">Orange Button</a>
+        <a class="medium button yellow">Yellow Button</a></li>
+        </ul>
+</div>  
+     -->
+    
+
 </div>
 
 
+    </section>
+
     
-        
-</div>
-      
-              
-    <div id="footer">
-      <div class="containerdiv">
-        
-        <div id="contactinfo">
-          <p>
-            San Cayetano Alto  - Loja Ecuador • Línea Gratuita: 1800 8875 8875
-          </p>
-                    <ul class="footerlinks"><li class="menu-656 first"><a href="http://www.utpl.edu.ec/utpl" title="">UTPL</a></li>
-<li class="menu-654"><a href="http://www.utpl.edu.ec/academia" title="">Academia</a></li>
-<li class="menu-693"><a href="http://investigacion.utpl.edu.ec/" title="">Investigación</a></li>
-<li class="menu-1740"><a href="http://www.utpl.edu.ec/misiones-universitarias" title="">Misiones Universitarias</a></li>
-<li class="menu-655"><a href="http://www.utpl.edu.ec/vinculacion" title="">Vinculación</a></li>
-<li class="menu-692"><a href="http://www.utpl.edu.ec/comunicacion/" title="">Comunicación</a></li>
-<li class="menu-1990 last"><a href="http://www.utpl.edu.ec/transparencia-institucional" title="">Transparencia institucional</a></li>
-</ul>                 </div>
-        <a href="http://www.ideostudio.com/" title="IdeoStudio" id="ids">
-        <!--img  alt="IdeoStudio" src="/sites/all/themes/utpl/images/ids.jpg" /-->
-        </a>
-      </div>
-    </div>
-<!--
-
-<div id="ingresoeva" style="display: none;">
-  <div id="ingresoevadiv">
-    <form action="http://eva1.utpl.edu.ec/loginutpl/index.php" method="post" enctype="multipart/form-data" id="ingreso-eva">
-      <label for="username">Usuario</label>
-      <input type="text" name="username" id ="username" size="10" class="eva-field" value="Usuario" onfocus="if(this.value=='Usuario') this.value='';" onblur="if(this.value=='') this.value='';" />
-      <label for="password" >Contraseña</label>
-      <input type="password" name="password" id ="password" size="10" class="eva-field" onfocus="if(this.value=='Password') this.value='';" onblur="if(this.value=='') this.value='Password';" />
-      <input type="hidden" name="entrada" value="utpl"/>
-      <div style="position: absolute; bottom:20px;left:30px;  display: block">
-      <a href="http://rsa.utpl.edu.ec/eva/enrol/utpl/login/forgot_password_utpl.php">Olvid&eacute; mi contrase&ntilde;a</a>
-      <input type="button" onclick="encriptar(this.form)" class="form-submit-eva" name="submitButtonName" tabindex="5" value="Ingresar" accesskey="i"/> 
-      </div>
-    </form>
-        
-  </div>
-</div>-->
-
-
-
-  
-
-<div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div></body></html>
+ 
+    <footer>
+    </footer>
+ 
+    <aside>
+      <!--Contenido relacionado con la página o el sitio web-->
+    </aside>
+  </body>
+</html>

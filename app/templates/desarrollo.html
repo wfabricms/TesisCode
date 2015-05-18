@@ -1,0 +1,1053 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0023)http://www.utpl.edu.ec/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es" dir="ltr" class="js"><head>
+
+
+
+
+ <style type="text/css">
+ #logo {
+  width: 140%;
+  margin: -12px;
+}
+
+
+#tlt {
+    float: right;
+  display: block;
+  /* height: 79px; */
+  width: 35%;
+  margin: 30px 0 0 0;
+  color: #FFF;
+  font-size: 18px;
+  padding-right: 140px;
+  letter-spacing: 2px;
+  /* font-weight: 900; */
+}
+
+ #arq{
+    padding:1%px; margin: 8%; 
+
+  width: 75%; height: 75%;
+
+ }
+
+ #textresumen {
+  height: 75%;  
+  width: 80%;
+  text-align: justify;
+  padding:1%px; margin: 8%; 
+
+ }
+
+ #inic{
+height: 220px;  
+ }
+
+ #resultado #resultado #contenido_pestanas { 
+height: auto;
+
+  }
+
+ body {  margin: 0;  padding: 0;  font: 12px/170% Arial, Helvetica, sans-serif;  background: url({{ url_for('static', filename = 'img/bg.jpg') }}) repeat-x #EAE9E1;  color: #333;}
+
+a {color:#004370; text-decoration: none;}
+a:hover {text-decoration: underline}
+ul {margin:10px 0 0 10px;padding: 0 0 0 10px}
+ul li {padding: 0 0 0 2px }
+*html ul li a {padding:0; margin:0;line-height: 15px; }
+*html ul li{list-style-image:none; list-style: none; padding:0; line-height: 15px; margin:0}
+*html ul{list-style-image:none; list-style: none;line-height: 15px;}
+.containerdiv {  height: auto; margin: 0 auto;  width:924px;  padding:0 15px;  position: relative;  clear: both;  }
+p{line-height: 15px}
+
+.moduletext { font-family: Arial, Helvetica, sans-serif; font-size: :11px;}
+
+#header{display: block;clear: both;overflow: hidden;margin-bottom: 1px;}
+#body{background: #fff;height: auto;overflow: hidden; padding-bottom: auto; }
+#bodyheader{width: 684px;height:38px;clear:both;float:none;overflow: hidden;margin:0 0 0 0;position: relative;border-bottom: 1px dotted #999;}
+#bodyheader h2{padding:0;margin:10px 0 0 0;text-transform:uppercase;letter-spacing:-1px;font-family:Times;font-weight:normal;float:left;display:block;font-size: 23px;color:#004370;}
+#bodyheader .breadcrumb{position: absolute;top:10px;left:236px;}
+#bodyheader .breadcrumb a {color:#999;font-family: Arial, "MS Trebuchet", sans-serif;}
+#bodyheader .breadcrumb a.active {font-weight:bold;color:#333;}
+#footer{width:100%;background: #F2F2F2;border-top: 2px solid #004370;margin:0; padding: 20px 0 10px 0;clear: both;overflow: hidden;color:#666;font-size: 11px;}
+
+
+#left{width: 224px;float:left;margin:15px 14px 0 0;}
+
+#mainconent{width: 452px;float:left;margin:15px 14px 0 0;}
+#mainconent ul li{ list-style-image: url(/sites/all/themes/utpl/images/bullet.jpg);}
+.rssFeed ul li{ list-style-image: url(/sites/all/themes/utpl/images/bullet.jpg); line-height: 1.3;}
+.rssFeed p{ }
+.homecentermodule ul li{ list-style-image: url(/sites/all/themes/utpl/images/bullet.jpg); }
+#right{width: 205px;float:left; /*margin:15px 0 0 0;*/ margin: -3px 0 0 0; border-left: 1px dotted #999;padding-left:12px;}
+#searchbar{border:1px solid #BACBE3;width:222px;height:20px;display:block;position: absolute;top:57px;right: 30px;}
+
+#searchbar #edit-search-block-form-1{height:16px;padding:2px;width:189px;background:#EDEDED;float:left;border:none;color:#004370;}
+#searchbar #searchbt{height:20px;width:29px;float:left;}
+#servenlineadiv{display:none;position: absolute;top:25px;right: 0px;background: #004370;border:1px solid #ccc;border-top:none; padding-bottom: 0px}
+#servenlineadiv a{color:#fff; padding: 1px 8px 1px 5px;display: block}
+#servenlineadiv a:hover{color:#004370; background: #DEDDD8; text-decoration: none}
+#servenlineadiv ul {margin:0;padding: 0;}
+#servenlineadiv ul li{list-style: none; list-style-image: none;  }
+
+*html #servenlineadiv ul li{list-style: none;}
+*html #servenlineadiv a{display: inline;}
+
+
+ 
+#headerquickacces{position: absolute;display: block;}
+#headerquickacces .language-link{display:none;}
+#homelogo {float:left;display: block;height: 79px;width: 179px;margin:20px 0 0 0;}
+
+#headerquickacces{position: absolute;top:6px;right: 20px;}
+
+#headerquickacces a{color:#ccc;  font-size: 10px; margin:0 10px;font-weight: bold; float:left}
+#headerquickacces a:hover{color:#fff; }
+
+ul.enlinea li a{font-size: 11px}
+
+.hqas {margin:3px 0 0 0;display: block;height: 15px;width: 1px;border-left: 1px solid #f0f0f0;float:left;overflow: hidden;}
+
+#homebtn{float:left;}
+
+/*   <<<<<<  AREA PERSONALIZADA PARA PRESENTAR VENTANA FLOTANTE  >>>>>>*/
+
+.escuela-ventana {
+  text-align: justify;
+    width: 620px;
+    height: 400px;
+    overflow-x: hidden;
+}
+.info-escuela {
+  width:420px;
+  height:auto;
+  background-color:#FFF;
+  border-right: 1px dotted #999;
+  padding: 0 15px 0 15px;
+  text-align: justify;
+}
+.derecha-escuela {
+  background: url(/sites/all/themes/utpl/images/bgh3.jpg) repeat-x bottom;
+  padding: 5px 5px 15px 0;
+  margin-left: 20px;
+}
+.derecha1-escuela {
+  padding: 5px 5px 15px 5px;
+  margin-left: 20px;
+}
+.right-escuela {
+  width:140px;
+  height:auto;
+  margin-right:22px;
+  float:right;
+  padding: 0 3px 0 -5px;
+}
+
+#menusuperior{
+  width: 100%;
+  background: url(images/bg.jpg) repeat-x;
+  position: fixed;
+  z-index: 10000;
+  margin: 0;
+  padding: 0;
+  left: 0;
+}
+#menubar{
+  float: right;
+  font-family: Arial;
+  background: #003F72;
+}
+ul#navbar {
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+ul#navbar li {
+float: left;
+background: url(images/bg.jpg) repeat-x;
+font-size: 11px;
+padding: 1px 15px;
+border-right: 1px solid #fff;
+list-style: none !important;
+}
+ul#navbar a {
+color: #fff;
+text-decoration: none;
+text-align: center;
+display: block;
+width: 100%;
+}
+ul#navbar a:hover {
+background: url(images/bg.jpg) repeat-x;
+}
+ul#navbar ul {
+top: 19px;
+background: url(images/bg.jpg) repeat-x;
+display: none;
+}
+ul#navbar li li{
+list-style-type: none !important;
+}
+ul#navbar li:hover ul {
+display: block;
+position: absolute;
+padding: 2px 15px;
+margin: 0;
+padding: 0;
+list-style: none !important;
+}
+ul#navbar li:hover li {
+float: none;
+border-right: 1px solid #fff;
+list-style: none !important;
+}
+
+/*fin de los estilos de los iconos de las redes sociales*/
+
+
+
+
+#sitenavigation{display:block;float: left;clear: both;height: 28px;margin:10px 0 0 0;width: 100%;overflow: hidden;}
+
+ul.navigation-links {margin:0;padding:0;float:left;}
+ul.navigation-links li{display: inline; }
+ul.navigation-links li a{display: block;padding:5px 16px 3px 16px;float: left;border-left:1px solid #fff; border-right:1px solid #ccc}
+*html ul.navigation-links li a{display: block;padding:5px 35px 8px 35px;float: left; line-height: 20px}
+ul.navigation-links li a.active{display: block;padding:5px 35px 3px 35px;float: left; text-decoration:none;color:#fff;background: #004370;}
+ul.navigation-links li.active-trail a{display: block;padding:5px 35px 3px 35px;float: left; text-decoration:none;color:#fff;background: #004370;}
+ul.navigation-links li a:hover{text-decoration:none;color:#fff;background: #004370;}
+
+#submenu{display: none;overflow: hidden;background: #fff;}
+#submenucontainer {border:1px solid #ababab;border-top:none;width: 875px;padding: 10px;float: left;display: block;overflow: hidden;}
+#submenucontainer ul {float: left;display: block;overflow: hidden;padding:0;margin:0 45px 0 0;}
+#submenucontainer ul li {list-style: none;list-style-image: none; }
+#submenucontainer ul li a{font-size: 11px;}
+#submenucontainer ul.submenutpl{margin:0 10px 0 20px;}
+#submenucontainer ul.submenudocencia{margin:0 10px 0 20px;}
+#submenucontainer ul.submenuinvestigacion{margin: 0 40px 0 24px;}
+#submenucontainer ul.submenumisiones{margin: 0 0 0 30px;}
+#submenucontainer ul.submenuvinculacion{margin: 0 0 0 65px;}
+#submenucontainer ul.submenucomunicacion{margin: 0 10px 0 10px;}
+#menuexpand{height: 13px;background: url(/sites/all/themes/utpl/images/expand.jpg) 0px 8px no-repeat;padding:5px 0 5px 25px;margin:8px 0  5px 0;}
+
+
+
+ul.footerlinks {padding:0; float: left; margin:0 0 0 -10px}
+*html ul.footerlinks {padding:0; float: left; margin:0 0 0 0px}
+
+ul.footerlinks li{float: left;border-right:1px solid #666;display: block; padding: 0;margin:0;}
+#contactinfo a {color:#666;font-size: 11px; display: block;padding:0px 8px 5px 8px;float: left;  height: 12px;  margin:-3px 0 0 0;}
+#contactinfo p{padding:0; margin: center; }
+*html #contactinfo p{line-height: 20px}
+*html #contactinfo ul.footerlinks li a{padding-top:3px; }
+#contactinfo {float:left; margin:0 0 0 30px}
+#footer #ids {position: absolute;right: 25px;margin: 0 0 0 80px;background:url(/sites/all/themes/utpl/images/ids.jpg); width:112px;height:23px;}
+#footer #ids:hover{float: left;margin: 0 0 0 80px;background:url(/sites/all/themes/utpl/images/firma_ids_utpl.png); width:112px;height:23px;}
+ul.leftnavigation li {list-style-image: none;}
+ul.leftnavigation li a{ list-style: none !important; color:#333; background: #DEDDD8; display: block;padding:2px 0 2px 10px; margin:0 0 2px 0; font-size: 11px; text-decoration: none;}
+
+ul.leftnavigationsitemap li a{color:#333; background: #F5F5F5; display: block;padding:2px 0 2px 10px; margin:0 0 2px 0; font-size: 11px; text-decoration: none;}
+*html ul.leftnavigationsitemap li {list-style-image: none; list-style-type: none;margin:0; padding:0;}
+*html ul.leftnavigationsitemap li a {margin:0; padding:0}
+*html li.leaf {margin:0; padding:0; border:1px solid #fff}
+ul.leftnavigationsitemap li.active-trail a{background: #C2C2BD; color:#fff}
+ul.leftnavigationsitemap li a.active{color:#fff; background: #C2C2BD; display: block;padding:2px 0 2px 5px; margin:0 0 2px 0; font-size: 11px; text-decoration: none;}
+ul.leftnavigationsitemap li {list-style: none; padding:0; margin:0}
+ul.leftnavigationsitemap{padding:0; margin:0}
+ul.leftnavigationsitemap li ul.leftnavigationsubmenu li a {background: none;color:#333;}
+ul.leftnavigationsubmenu li{padding: 0;}
+ul.leftnavigationsubmenu li a{background:none; padding:2px 0 2px 10px;}
+ul.leftnavigationsitemap li ul.leftnavigationsubmenu li a:hover{background:#F5F5F5}
+
+ul.leftnavigationsitemap .leftnavigationsubmenu li a{padding:2px 0 2px 20px;} 
+
+
+
+*html ul.leftnavigation li {list-style: none; list-style-image: none; list-style-type: non;margin:0 padding:0e}
+*html ul.leftnavigation li a {margin:0 padding:0}
+*html li.leaf {margin:0 padding:0; border:1px solid #fff}
+ul.leftnavigation li.active-trail a{background: #C2C2BD; color:#fff}
+ul.leftnavigation li a.active{color:#fff; background: #C2C2BD; display: block;padding:2px 0 2px 10px; margin:0 0 2px 0; font-size: 11px; text-decoration: none}
+ul.leftnavigation li {list-style: none; padding:0; margin:0}
+ul.leftnavigation{padding:0; margin:0}
+ul.leftnavigation li ul.leftnavigationsubmenu li a {background: none;color:#333;}
+ul.leftnavigationsubmenu li{padding: 0;}
+ul.leftnavigationsubmenu li a{background:none; padding:2px 0 2px 20px;}
+ul.leftnavigation li ul.leftnavigationsubmenu li a:hover{background:#E4E4E4}
+ul.leftnavigationsubmenu li a.active{background:#E4E4E4;padding:2px 0 2px 20px;}
+ul.leftnavigation li ul.leftnavigationsubmenu li a.active{background: #E4E4E4}
+ul.leftnavigation.leftnavigationsubmenu.desactivado li{display:none}
+li.expanded.last.active-trail ul li{display: block}
+li.expanded.active-trail ul.leftnavigation.leftnavigationsubmenu.desactivado li{display: block}
+li.expanded.first.active-trail ul li{display: block}
+#mainconenthome{ width: 682px;float:left;margin:10px 14px 0 0;}
+
+.rssitem {font-size:11px;line-height: 11px;padding: 0 0 5px 0; border-bottom:1px dotted #999999; margin: 0 0 15px 0  }
+.rssitem img{float:left; background: url(/sites/all/themes/utpl/images/rssimgbg.jpg); padding: 2px 7px 2px 2px; margin:0 5px 20px 0 }
+.rssitem a{font-weight: bold}
+a.blocklink {display: block; background: #EDEDED; color:#004370; font-weight: bold; padding: 3px 0 3px 5px; line-height: 11px;overflow:hidden;clear:both}
+.rss {position: relative}
+.rssicon{position: absolute; right: 4px; top:4px;}
+.eventos {margin:20px 0 30px 0}
+#homeheaderimages {
+    position:relative;
+    width:686px;
+    height:249px;
+    margin:0 0 20px 0;
+    padding: 0 0 20px 0;
+    border-bottom: 1px dotted #999; 
+    
+}
+
+
+      .controls{
+    text-align: right;
+    margin-top: -2px;
+    font-family: 'Lato', Arial, sans-serif;
+}
+
+.tableA{
+    margin: auto;
+    width: 85%;
+    background-color: #fff;
+    
+}
+.center {
+    
+    width: 70%;
+    background-color: #000;
+}
+
+
+.checks{
+  vertical-align: top;
+
+}
+
+#rstUp  td{
+  text-align: center;
+  border: 1px solid #999;
+    margin: auto;
+    width: 120  %;
+    background-color: #fff;
+}
+
+.colNum1{
+  text-align: right;
+  padding-right: 10px; 
+  border-left: 1px solid #004370;
+  border-right: 1px solid #004370;
+  border-bottom: 1px solid #004370;
+  border-top: 1px solid #004370;
+  width: 20px;
+  color: #222;
+    /*background-color: #004370;*/
+
+}
+.colData1{
+  text-align: left;
+  padding-left: 10px; 
+  border-left: 1px solid #004370;
+  border-right: 1px solid #004370;
+  border-bottom: 1px solid #004370;
+  border-top: 1px solid #004370;
+  width: 700px;
+    color: #222;
+    /*background-color: #004370;*/
+}
+
+.colNum2{
+  text-align: right;
+  padding-right: 10px;
+  border-left: 1px solid  #dd5244 ;
+  border-right: 1px solid  #dd5244  ;
+  border-bottom: 1px solid  #dd5244 ;
+  border-top: 1px solid  #dd5244  ;
+  width: 20px ;
+    color: #222;
+    /*background-color: #dd5244;*/
+}
+.colData2{
+  text-align: left;
+  padding-left: 10px; 
+  border-left: 1px solid  #dd5244 ;
+  border-right: 1px solid  #dd5244  ;
+  border-bottom: 1px solid  #dd5244 ;
+  border-top: 1px solid  #dd5244  ;
+  width: 700px;
+    color: #222;
+    /*background-color: #dd5244;*/
+}
+
+
+
+
+
+
+.demo h1                        {   margin-bottom: 50px;}
+a.boton_demo                    {   position: absolute; top: 580px; left: 70px; }
+#contenido_pestanas             {   margin-left: 70px;}
+#contenido_pestanas h3          {   margin-bottom: 10px;}
+#contenido_pestanas h3,
+#contenido_pestanas p           {   margin-left: 0px !important; clear: both;}
+#contenido_pestanas span.menu ul          {   display: block; height: 18px;}
+
+#contenido_pestanas div         {   width: 600px; background: #fff; padding: 26px;}
+
+
+
+
+.demo .contenido ul {
+    list-style-position: inside;
+    list-style-type: none !important;
+    margin-left: 0 !important;
+}
+.back {
+    margin: auto;
+    background-color: #fff;
+    font-style: normal;
+    font-size: 13px;
+    font-family: "Times New Roman", Times, serif;
+}
+nav a {
+    margin: auto;
+    font-style: normal;   
+}
+
+h1 {
+  display: block; text-decoration: none;
+  font: 30px Helvetica, Arial, Sans-Serif;  
+  
+  color: #999; text-shadow: 0px 3px 8px #2a2a2a;
+ }
+  h1:hover {
+    color: #a0a0a0; text-shadow: 0px 5px 8px #2a2a2a;
+  }
+ 
+h2 {
+    
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    font-size: 1.700em;
+    margin: 15px;
+    text-shadow: 0px 1px 1px #2C4887;
+  
+  
+  color: #FFCD08; text-shadow: 0px 1px 1px #2C4887;
+}
+h4 {
+    font-family: "futura-pt", helvetica, sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #000;
+  font-size: 1.3em;
+  margin: 15px;
+  
+  
+  color: #222; text-shadow: 0px 1px 1px #ccc;
+}
+input[type=checkbox] {display:none;}
+  
+span.mcheck {
+background-color:#fff;
+
+
+font-family: 'Lato', Arial, sans-serif;
+font-size:.8em;
+text-decoration:none;
+padding-left: 40px; 
+width:180px;
+height:26px;
+line-height:30px;
+cursor:pointer;
+display:block;
+margin: 0 auto;
+-webkit-transition:background-color 150ms ease-in;
+-moz-transition:background-color 150ms ease-in;
+-ms-transition:background-color 150ms ease-in;
+-o-transition:background-color 150ms ease-in;
+transition:background-color 150ms ease-in;
+
+color:#fff;
+text-decoration:none;
+text-shadow: 0 0 1px rgba(255,255,255,0.3);
+background:#dd5244 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAS5JREFUeNq8110OgjAMAGBGvIY3VESjt9jPg95PT+LccBIZ7dYOWJPGB+g+Ymg3hLW2QeLkcu/y2pSFdvl0eQevehjI3uXbfkMh96TShFq/xhG6J4faAtxEtSBOQTm4QWpnOBWl4CZT69fuYpiCpnBDrB1xLhrjgoFO8F1oGcFslUv4bV32zFoxmOHJta0XMn65dC0UaiddA8UGiN4axeC1cUkdmWviEls/NwL1FqjPNtNvoimPdC3yRCUTiTXbt0R/oSnw2iiK10BBvBY6w2uiE3xJr8oFtcrvxy/fVcyeVdGx98yotcOxN/znHeMUIhdMOG8c4reagssF43VEoT5O4ZJwvNUUFJtcEE5BMXyGpnanf5yDxjiI+hSJj7YunEBvhbuTCh9tD+jiR4ABAJ0SrJgNr1UAAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:12px 11px;
+
+}
+
+span.mcheck:hover {
+color:rgba(255,255,255,0.5);
+background-color:#8298F0;
+background:#5C7AF6 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNpi+P//PwMNsS4QbwBiLnQ5WlqqAsRP/0PARiBmoYfFkkB8+z8qWALEjLS0mB+IL/3HDibSymJQXB7/jx/UgNSCvU4lwAbEG4DYkwi1WUxUspQZiOcRaSkIWOAKMk0Sg3jaf+IBOIVjMyQWiH8DsR+RljaTYOkBWJ5GNwRk2R+ooh9A7ETA0jwSLL0ATfEYqRpkyVc0xR+A2AyHpdFA/I9IS0F5WhRbAWIEtQQbeAXE6lhC5jeRlj4GYgVsRaYK1HBCmmWgmuyxhAwu8BpaXjNgs/gYkYbcAGIXPCGDDkCOM8eVPkCEFhE+JhX8BGJnfAkTxgC57BOVLAXlihBC2RA9Vf+k0FJQKk8nJv+jCwQi5WNyQAWxpR02wRQS8icy6CKlmMUlUUGipfOQK3lKLAbhdhIKfWZS6258kiAfzCZg6V4gZiOn0UBIAcgn63BYehK50Ke2xQxQH+3FUoqJUtJMIlYhLxAfxVJu09xiWENuMxCrUaNhCBBgAOAVfjALa5TLAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:12px 11px;
+}
+
+input[type=checkbox]:checked + span.mcheck {
+text-decoration:none;
+background:#004370 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNpi+P//PwMNsS4QbwBiLnQ5WlqqAsRP/0PARiBmoYfFkkB8+z8qWALEjLS0mB+IL/3HDibSymJQXB7/jx/UgNSCvU4lwAbEG4DYkwi1WUxUspQZiOcRaSkIWOAKMk0Sg3jaf+IBOIVjMyQWiH8DsR+RljaTYOkBWJ5GNwRk2R+ooh9A7ETA0jwSLL0ATfEYqRpkyVc0xR+A2AyHpdFA/I9IS0F5WhRbAWIEtQQbeAXE6lhC5jeRlj4GYgVsRaYK1HBCmmWgmuyxhAwu8BpaXjNgs/gYkYbcAGIXPCGDDkCOM8eVPkCEFhE+JhX8BGJnfAkTxgC57BOVLAXlihBC2RA9Vf+k0FJQKk8nJv+jCwQi5WNyQAWxpR02wRQS8icy6CKlmMUlUUGipfOQK3lKLAbhdhIKfWZS6258kiAfzCZg6V4gZiOn0UBIAcgn63BYehK50Ke2xQxQH+3FUoqJUtJMIlYhLxAfxVJu09xiWENuMxCrUaNhCBBgAOAVfjALa5TLAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:12px 11px;
+}
+
+
+
+input[type=checkbox]:checked:hover + span.mcheck {
+background-color:#dd5244;
+color:rgba(255,255,255,0.5);
+text-decoration:none;
+  background:#dd5244 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAS5JREFUeNq8110OgjAMAGBGvIY3VESjt9jPg95PT+LccBIZ7dYOWJPGB+g+Ymg3hLW2QeLkcu/y2pSFdvl0eQevehjI3uXbfkMh96TShFq/xhG6J4faAtxEtSBOQTm4QWpnOBWl4CZT69fuYpiCpnBDrB1xLhrjgoFO8F1oGcFslUv4bV32zFoxmOHJta0XMn65dC0UaiddA8UGiN4axeC1cUkdmWviEls/NwL1FqjPNtNvoimPdC3yRCUTiTXbt0R/oSnw2iiK10BBvBY6w2uiE3xJr8oFtcrvxy/fVcyeVdGx98yotcOxN/znHeMUIhdMOG8c4reagssF43VEoT5O4ZJwvNUUFJtcEE5BMXyGpnanf5yDxjiI+hSJj7YunEBvhbuTCh9tD+jiR4ABAJ0SrJgNr1UAAAAAAElFTkSuQmCC) no-repeat 7% center;
+background-size:12px 11px;
+}
+
+#textMain, #tjson {  
+    padding: 5px;  
+    font-size: 12px;  
+    text-shadow: 0px 1px 0px #fff;  
+    outline: none;  
+    -webkit-border-radius: 3px;  
+    -moz-border-radius: 3px;  
+    border-radius: 3px;  
+    border: 1px solid #ccc;  
+    -webkit-transition: .3s ease-in-out;  
+    -moz-transition: .3s ease-in-out;  
+    resize: none;
+}  
+  
+    #textMain:focus, #tjson:focus {  
+    border: 1px solid #fafafa;  
+    -webkit-box-shadow: 0px 0px 6px #222;  
+    -moz-box-shadow: 0px 0px 5px #222;  
+    box-shadow: 0px 0px 5px #222;  
+} 
+
+#dark{
+  background-color:#333;
+  border:1px solid #000;
+  padding:10px;
+  margin-top:20px;
+} 
+
+#contenido_pestanas, #resulUp{
+  padding:5px;
+  margin-top:20px;
+  width: 80%;
+  margin: 0 auto;
+} 
+
+.button, .button:visited {
+  background: #222 ; 
+  display: inline-block; 
+  padding: 5px 10px 6px; 
+  color: #fff; 
+  text-decoration: none;
+  
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  position: relative;
+  cursor: pointer
+}
+ 
+  .button:hover             { background-color: #111; color: #fff; }
+  .button:active              { top: 1px; }
+  
+  .button, .button:visited,
+  .medium.button, .medium.button:visited    { font-size: 13px; 
+                          line-height: 1; 
+                          }
+                          
+  .go.button, .go.button:visited        { background-color: #333; }
+  .go.button:hover              { background-color: #FFCD08; }
+  .reset.button, .reset.button:visited      { background-color: #333; }
+  .reset.button:hover             { background-color: #dd5244; }
+
+
+
+  .cl-effect-15 a {
+    color: rgba(0,0,0,0.2);
+    font-weight: 700;
+    text-shadow: none;
+}
+ 
+.cl-effect-15 a::before {
+    color: #fff;
+    content: attr(data-hover);
+    position: absolute;
+    transition: transform 0.3s, opacity 0.3s;
+}
+ 
+.cl-effect-15 a:hover::before,
+.cl-effect-15 a:focus::before {
+    transform: scale(0.9);
+    opacity: 0;
+}
+
+
+.color-1 {
+  background: #004370;
+}
+
+nav a.aqui      {   text-shadow: 1px 1px 3px rgba(0,0,0,1);}
+
+.headMenu {
+  position: relative;
+  display: inline-block;
+  outline: none;
+  color: #222;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .8em;
+}
+
+.headMenu:hover {
+
+  color: #888;
+
+}
+
+.subtRest {
+  position: relative;
+  display: inline-block;
+  outline: none;
+  color: #222;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .85em;
+} 
+
+
+nav.cl-effect-1 a {
+  position: relative;
+  display: inline-block;
+  margin: 8px 8px;
+  outline: none;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  text-shadow: 0 0 1px rgba(255,255,255,0.3);
+  font-size: .8em;
+}
+
+nav.cl-effect-1 a:hover,
+nav.cl-effect-1 a:focus {
+  outline: none;
+}
+
+/* Effect 1: Brackets */
+.cl-effect-1 a::before,
+.cl-effect-1 a::after {
+  display: inline-block;
+  opacity: 0;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+  -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+  transition: transform 0.3s, opacity 0.2s;
+}
+
+.cl-effect-1 a::before {
+  margin-right: 10px;
+  content: '[';
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+.cl-effect-1 a::after {
+  margin-left: 10px;
+  content: ']';
+  -webkit-transform: translateX(-20px);
+  -moz-transform: translateX(-20px);
+  transform: translateX(-20px);
+}
+
+.cl-effect-1 a:hover::before,
+.cl-effect-1 a:hover::after,
+.cl-effect-1 a:focus::before,
+.cl-effect-1 a:focus::after {
+  opacity: 1;
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  transform: translateX(0px);
+}
+
+
+/*.spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+*/
+
+.spinner {
+  margin: 100px auto;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.container1 > div, .container2 > div, .container3 > div {
+  width: 6px;
+  height: 6px;
+  background-color: #333;
+
+  border-radius: 100%;
+  position: absolute;
+  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+  animation: bouncedelay 1.2s infinite ease-in-out;
+  
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .spinner-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.container2 {
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+.container3 {
+  -webkit-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+
+.circle1 { top: 0; left: 0; }
+.circle2 { top: 0; right: 0; }
+.circle3 { right: 0; bottom: 0; }
+.circle4 { left: 0; bottom: 0; }
+
+.container2 .circle1 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.container3 .circle1 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.container1 .circle2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.container2 .circle2 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+.container3 .circle2 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+.container1 .circle3 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+
+.container2 .circle3 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+.container3 .circle3 {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+
+.container1 .circle4 {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.container2 .circle4 {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+
+.container3 .circle4 {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+*/
+
+
+    </style>
+    
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+    
+    <meta charset="utf-8"/><!--La codificacion del documento es UTF-8-->
+    <title>Procesamiento de Texto - WS integrador</title><!--Se recomienda un titulo diferente para cada página del sitio web-->
+
+
+
+
+
+  
+  </head>
+  <body>
+
+        <link rel="stylesheet" href="./Universidad Tecnica Particular de Loja - U T P L   Ecuador_files/menu.css" type="text/css">
+
+    <div id="header" class="containerdiv">
+      
+      <a href="http://www.utpl.edu.ec/" title="Universidad Tecnica Particular de Loja - U T P L | Ecuador " id="homelogo">
+
+      <img src="{{ url_for('static', filename = 'img/logo.png') }}" alt="Universidad Tecnica Particular de Loja - U T P L | Ecuador " id="logo"></a>
+      
+      <div  id="tlt"><strong>ENLACE Y ENRIQUECIMIENTO EN DATOS ENLAZADOS</strong></div>  
+            
+      <div id="sitenavigation">
+        
+
+
+
+
+<ul class="navigation-links"><li class="menu-656 first"><a href="/frontal" onclick="location.reload();" title="">Inicio</a></li>
+<li class="menu-1740"><a href="#" title="">Abstract</a></li>
+<li class="menu-693"><a href="/contactos" title="">Contactos</a></li>
+
+<li class="menu-654"><a href="http://www.utpl.edu.ec/" target="_blank" title="UTPL">UTPL</a></li>
+
+</ul>     
+</div>
+    </div>
+<div id="body" class="containerdiv">
+
+
+
+<header>
+      
+ 
+      <hgroup>
+        <h2>Desarrollo</h2>
+        
+      </hgroup>
+    </header>
+ 
+   
+
+      <div id="page" class="back">
+    
+   
+<div id = "textresumen"  style="text-align: justify;">    
+    <p><strong>RESUMEN</strong></p>
+El presente trabajo busca proveer una herramienta que permita la automatización del procesamiento de las publicaciones académicas, que son el aporte de investigadores de
+diferentes ramas de las ciencias, a través de técnicas del Procesamiento de Lenguaje Natural (PLN), con el fin de extraer datos y enlazarlos con recursos abiertos de DBpedia;
+levantar servicios RESTful, para las funcionalidades relevantes del sistema. 
+Propone una implementación del algoritmo de Lesk, que permite la desambiguación del sentido de la palabra, teniendo como base de conocimiento el Dataset de DBpedia de
+estas forma lograr el enlace con fuetes de datos abiertos.
+La construcción de un frontal Web GUI que permite la integración de los servicios levantados y facilite su comunicación con los usuarios.
+<br>
+
+<br>
+<br>
+<p><strong>ARQUITECTURA</strong></p>
+Después de haber realizado el análisis y posterior investigación sobre los puntos más
+relevantes dentro del desarrollo, se propone la siguiente propuesta lógica para el
+funcionamiento de los componentes a desarrollar, en base a los requerimientos funcionales,
+los casos de uso a los que va a responder el software, y las tecnologías disponibles que se
+pueden implementar para la resolución de la problemática planteada.
+La distribución de los componentes implementados se resume en la gráfica a continuación, haciendo
+una división de los componentes de la aplicación que interactúan para dar solución a la
+problemática. 
+<br>
+<img id = "arq" src="{{ url_for('static', filename = 'img/arq.jpg') }}"/>
+<br>
+
+
+
+<p><strong>SERVICIOS WEB</strong></p>
+<ul>
+<li>Interfaz GUI </li>
+<a href="http://taw02.utpl.edu.ec/anavisoers/frontal" target="_blank">http://taw02.utpl.edu.ec/anavisoers/frontal</a><br><br>
+
+<li>Servicios de Tokenización de sentencias</li>
+<a href="http://taw02.utpl.edu.ec/anavisoers/TokensSentencias?text='Loja is a city from Ecuador.'" target="_blank"> http://taw02.utpl.edu.ec/anavisoers/TokensSentencias</a><br><br>
+
+<li>Servicios de Tokenización en Palabras</li>
+<a href="http://taw02.utpl.edu.ec/anavisoers/TokensPalabra?text='Loja is a city from Ecuador.'" target="_blank">http://taw02.utpl.edu.ec/anavisoers/TokensPalabra</a><br><br>
+
+<li>Servicios de Etiquetado</li>
+<a href="http://taw02.utpl.edu.ec/anavisoers/Etiquetado?text='Loja is a city from Ecuador.'" target="_blank">http://taw02.utpl.edu.ec/anavisoers/Etiquetado</a><br><br>
+
+<li>Servicios de Extracción</li>
+<a href="http://taw02.utpl.edu.ec/anavisoers/ExtracionEntidades?text='Loja is a city from Ecuador.'" target="_blank">http://taw02.utpl.edu.ec/anavisoers/ExtracionEntidades</a><br><br>
+
+<li>Servicios de Desambiguación</li>
+<a href="http://taw02.utpl.edu.ec/anavisoers/Desambiguacion?text='Loja is a city from Ecuador.'" target="_blank">http://taw02.utpl.edu.ec/anavisoers/Desambiguacion</a><br><br>
+
+</ul>
+<br>
+
+
+<br>
+
+
+<p><strong>CONCLUSIONES</strong></p>
+
+Una vez terminadas las diferentes fases del proyecto e implementada la aplicación en
+cada una de sus funcionalidades, haberlas puesto a prueba y corregido errores, se
+puede concluir:
+<ul>
+<li>La investigación y estudio de los diferentes ámbitos que abarca el proyecto han
+permitido hacer una adecuada elección de las herramientas tecnologías para su
+desarrollo.</li>
+
+<li> Los problemas relacionados con el Procesamiento del Lenguaje Natural (PLN),
+pueden ser abordados esperando resultados optimistas, aun cuando los objetivos
+que se persigan sean complejos.</li>
+
+<li>Una metodología ágil
+basada en prototipos como ICONIX, ha permitido una
+desarrollo evolutivo de la aplicación acorde los avances investigativos, resolución de
+problemas encontrados, reuniones, etc.</li>
+
+<li>Una vez realizadas las pruebas sobre el servicio web de extracción, en promedio del
+total de elementos extraídos y de acuerdo con la clasificación establecida para los
+resultados de esta aplicación, el 8.14% son entidades, 24.14% keywords
+compuestos y 67.7% son keywords simples.</li>
+
+<li>Del total de elementos extraídos en las pruebas realizadas, en promedio solo 36.4%
+es enlazado hacia recursos de DBpedia,
+dejando un porcentaje
+63.6% de
+elementos extraídos sin ser enlazados</li>
+
+<li>De todos los elementos enlazados 16.7% son entidades, 4.2% son keywords
+compuestas y el 79.1% son keywords simples.</li>
+
+<li>Del total de entidades extraídas el 59% se han enlazado con un recurso de DBpedia
+(es decir, que de 10 entidades extraídas un aproximado de 6 serían enlazadas) lo
+cual por tratarse de los elementos principales en los textos analizados, deja una
+buena impresión de los recursos disponibles en el dataset de DBpedia.</li>
+
+<li>De las keywords compuestas extraídas el 9.3% han sido enlazadas, resultado el
+conjunto de resultados con menor porcentaje de éxito al enlazar con recursos de
+DBpedia</li>
+</ul>
+<br>  
+</div>
+       
+    <div id="resulUp">  </div>  
+    <div id="resultado"> <div id="inic"></div> </div>    
+    
+</div>
+
+
+    
+        
+</div>
+      
+              
+    <div id="footer">
+      <div class="containerdiv">
+        
+        <div id="contactinfo">
+          <p>
+            San Cayetano Alto  - Loja Ecuador • Línea Gratuita: 1800 8875 8875
+          </p>
+                    <ul class="footerlinks"><li class="menu-656 first"><a href="http://www.utpl.edu.ec/utpl" title="">UTPL</a></li>
+<li class="menu-654"><a href="http://www.utpl.edu.ec/academia" title="">Academia</a></li>
+<li class="menu-693"><a href="http://investigacion.utpl.edu.ec/" title="">Investigación</a></li>
+<li class="menu-1740"><a href="http://www.utpl.edu.ec/misiones-universitarias" title="">Misiones Universitarias</a></li>
+<li class="menu-655"><a href="http://www.utpl.edu.ec/vinculacion" title="">Vinculación</a></li>
+<li class="menu-692"><a href="http://www.utpl.edu.ec/comunicacion/" title="">Comunicación</a></li>
+<li class="menu-1990 last"><a href="http://www.utpl.edu.ec/transparencia-institucional" title="">Transparencia institucional</a></li>
+</ul>                 </div>
+        <a href="http://www.ideostudio.com/" title="IdeoStudio" id="ids">
+        <!--img  alt="IdeoStudio" src="/sites/all/themes/utpl/images/ids.jpg" /-->
+        </a>
+      </div>
+    </div>
+<!--
+
+<div id="ingresoeva" style="display: none;">
+  <div id="ingresoevadiv">
+    <form action="http://eva1.utpl.edu.ec/loginutpl/index.php" method="post" enctype="multipart/form-data" id="ingreso-eva">
+      <label for="username">Usuario</label>
+      <input type="text" name="username" id ="username" size="10" class="eva-field" value="Usuario" onfocus="if(this.value=='Usuario') this.value='';" onblur="if(this.value=='') this.value='';" />
+      <label for="password" >Contraseña</label>
+      <input type="password" name="password" id ="password" size="10" class="eva-field" onfocus="if(this.value=='Password') this.value='';" onblur="if(this.value=='') this.value='Password';" />
+      <input type="hidden" name="entrada" value="utpl"/>
+      <div style="position: absolute; bottom:20px;left:30px;  display: block">
+      <a href="http://rsa.utpl.edu.ec/eva/enrol/utpl/login/forgot_password_utpl.php">Olvid&eacute; mi contrase&ntilde;a</a>
+      <input type="button" onclick="encriptar(this.form)" class="form-submit-eva" name="submitButtonName" tabindex="5" value="Ingresar" accesskey="i"/> 
+      </div>
+    </form>
+        
+  </div>
+</div>-->
+
+
+
+  
+
+<div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div></body></html>

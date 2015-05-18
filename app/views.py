@@ -54,3 +54,13 @@ def DesamabiguacionEntidades():
 def frontal():
         return render_template('frontal.html', 
         title = 'Web Servie Disambiguacion')
+
+@app.route('/contactos', methods = ['GET', 'POST'])
+def contactos():
+        return render_template('contactos.html', 
+        title = 'Web Servie Disambiguacion')
+
+@app.route('/desarrollo', methods = ['GET', 'POST'])
+def desarrollo():
+        return render_template('desarrollo.html', 
+        title = 'Web Servie Disambiguacion')
